@@ -1,0 +1,80 @@
+---
+import { languages, type SupportedLanguage, useTranslations, getLocalizedPath } from '../i18n/ui';
+
+interface Props {
+  currentLang: SupportedLanguage;
+}
+
+const { currentLang } = Astro.props;
+const t = useTranslations(currentLang);
+
+const isDefault = currentLang === 'en';
+const homePath = isDefault ? '/' : `/${currentLang}/`;
+const currentLangName = languages[currentLang].name;
+---
+
+<nav aria-label="Breadcrumb" class="w-full max-w-6xl mx-auto px-4 sm:px-6 pt-6 pb-2">
+  <ol
+    class="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-semibold text-palette-cobalt dark:text-palette-sky"
+    itemscope
+    itemtype="https://schema.org/BreadcrumbList"
+  >
+    <!-- Item 1: Home -->
+    <li
+      class="flex items-center gap-2"
+      itemprop="itemListElement"
+      itemscope
+      itemtype="https://schema.org/ListItem"
+    >
+      <a
+        href="/"
+        class="flex items-center gap-1.5 hover:text-palette-obsidian dark:hover:text-palette-alabaster transition-colors"
+        itemprop="item"
+      >
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <span itemprop="name">{t('breadcrumbHome')}</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+
+    <li class="text-palette-sky/60 dark:text-palette-cobalt/60 select-none" aria-hidden="true">/</li>
+
+    {!isDefault && (
+      <>
+        <!-- Item 2 (if localized sub-path): Language -->
+        <li
+          class="flex items-center gap-2"
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
+        >
+          <a
+            href={homePath}
+            class="hover:text-palette-obsidian dark:hover:text-palette-alabaster transition-colors"
+            itemprop="item"
+          >
+            <span itemprop="name">{currentLangName}</span>
+          </a>
+          <meta itemprop="position" content="2" />
+        </li>
+
+        <li class="text-palette-sky/60 dark:text-palette-cobalt/60 select-none" aria-hidden="true">/</li>
+      </>
+    )}
+
+    <!-- Item 3: Current Page / Tool -->
+    <li
+      class="text-palette-obsidian dark:text-palette-alabaster font-bold truncate"
+      itemprop="itemListElement"
+      itemscope
+      itemtype="https://schema.org/ListItem"
+      aria-current="page"
+    >
+      <span itemprop="name">{t('breadcrumbCurrent')}</span>
+      <meta itemprop="position" content={isDefault ? '2' : '3'} />
+    </li>
+  </ol>
+</nav>

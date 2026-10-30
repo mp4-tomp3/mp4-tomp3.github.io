@@ -15,9 +15,121 @@ const { currentLang, title, description } = Astro.props;
 const t = useTranslations(currentLang);
 
 const pageTitle = title || t('siteTitle');
-const pageDesc = description || t('siteTagline');
+const pageDesc = description || t('metaDescription');
 const siteUrl = 'https://mp4-tomp3.github.io';
-const canonicalUrl = `${siteUrl}${getLocalizedPath(Astro.url.pathname, currentLang)}`;
+const canonicalPath = currentLang === 'en' ? '/' : `/${currentLang}/`;
+const canonicalUrl = `${siteUrl}${canonicalPath}`;
+
+// Structured Data: WebApplication
+const webApplicationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  'name': 'MP4 to MP3 Converter Free',
+  'alternateName': t('siteTitle'),
+  'url': canonicalUrl,
+  'description': pageDesc,
+  'applicationCategory': 'MultimediaApplication',
+  'operatingSystem': 'All',
+  'browserRequirements': 'Requires HTML5 / WebAudio / WebAssembly',
+  'offers': {
+    '@type': 'Offer',
+    'price': '0',
+    'priceCurrency': 'USD',
+  },
+  'inLanguage': currentLang,
+  'featureList': [
+    '100% Client-Side In-Browser Conversion',
+    'Zero Server Uploads & 100% Privacy',
+    'Offline PWA Support',
+    'Audio Quality Bitrates (128kbps, 192kbps, 320kbps)',
+    'Audio Trimming & Fade Envelopes',
+    'Batch Video to MP3 Processing',
+  ],
+};
+
+// Structured Data: BreadcrumbList
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    {
+      '@type': 'ListItem',
+      'position': 1,
+      'name': t('breadcrumbHome'),
+      'item': `${siteUrl}/`,
+    },
+    ...(currentLang !== 'en'
+      ? [
+          {
+            '@type': 'ListItem',
+            'position': 2,
+            'name': languages[currentLang].name,
+            'item': canonicalUrl,
+          },
+        ]
+      : []),
+  ],
+};
+
+// Structured Data: FAQPage
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': t('faq1Q'),
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': t('faq1A'),
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': t('faq2Q'),
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': t('faq2A'),
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': t('faq3Q'),
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': t('faq3A'),
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': t('faq4Q'),
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': t('faq4A'),
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': t('faq5Q'),
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': t('faq5A'),
+      },
+    },
+  ],
+};
+
+// Locale mapping for OpenGraph
+const ogLocales: Record<SupportedLanguage, string> = {
+  en: 'en_US',
+  es: 'es_ES',
+  pt: 'pt_BR',
+  de: 'de_DE',
+  fr: 'fr_FR',
+  ja: 'ja_JP',
+  zh: 'zh_CN',
+  ru: 'ru_RU',
+};
 ---
 
 <!doctype html>
@@ -27,17 +139,28 @@ const canonicalUrl = `${siteUrl}${getLocalizedPath(Astro.url.pathname, currentLa
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDesc} />
+    <meta name="keywords" content={t('metaKeywords')} />
     <meta name="theme-color" content="#4A70A9" />
 
-    <!-- Canonical URL -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7JNXXYMP21"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-7JNXXYMP21');
+    </script>
+
+    <!-- Canonical URL: Self-referencing dynamic canonical tag -->
     <link rel="canonical" href={canonicalUrl} />
 
-    <!-- Hreflang alternates for all 8 languages -->
+    <!-- Bidirectional Hreflang Matrix for 8 languages + x-default -->
     {Object.keys(languages).map((code) => {
-      const altUrl = `${siteUrl}${getLocalizedPath(Astro.url.pathname, code as SupportedLanguage)}`;
-      return <link rel="alternate" hreflang={code} href={altUrl} />;
+      const altPath = code === 'en' ? '/' : `/${code}/`;
+      return <link rel="alternate" hreflang={code} href={`${siteUrl}${altPath}`} />;
     })}
-    <link rel="alternate" hreflang="x-default" href={siteUrl} />
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}/`} />
 
     <!-- PWA & Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -45,15 +168,22 @@ const canonicalUrl = `${siteUrl}${getLocalizedPath(Astro.url.pathname, currentLa
     <link rel="manifest" href="/manifest.webmanifest" />
 
     <!-- Open Graph & Social Cards -->
+    <meta property="og:site_name" content="MP4 to MP3 Converter" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDesc} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={`${siteUrl}/icon.svg`} />
+    <meta property="og:locale" content={ogLocales[currentLang]} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDesc} />
     <meta name="twitter:image" content={`${siteUrl}/icon.svg`} />
+
+    <!-- Structured Data JSON-LD (Strict Safe Search: 0 Fake Reviews/Ratings) -->
+    <script type="application/ld+json" set:html={JSON.stringify(webApplicationSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

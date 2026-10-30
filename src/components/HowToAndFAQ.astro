@@ -27,11 +27,38 @@ const steps = [
     desc: t('step3Desc'),
     icon: 'M13 10V3L4 14h7v7l9-11h-7z',
   },
+];
+
+const comparisons = [
   {
-    num: '04',
-    title: t('step4Title'),
-    desc: t('step4Desc'),
-    icon: 'M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4',
+    name: t('comp1Name'),
+    us: t('comp1Us'),
+    them: t('comp1Them'),
+    icon: 'shield',
+  },
+  {
+    name: t('comp2Name'),
+    us: t('comp2Us'),
+    them: t('comp2Them'),
+    icon: 'zap',
+  },
+  {
+    name: t('comp3Name'),
+    us: t('comp3Us'),
+    them: t('comp3Them'),
+    icon: 'infinity',
+  },
+  {
+    name: t('comp4Name'),
+    us: t('comp4Us'),
+    them: t('comp4Them'),
+    icon: 'wifi-off',
+  },
+  {
+    name: t('comp5Name'),
+    us: t('comp5Us'),
+    them: t('comp5Them'),
+    icon: 'smile',
   },
 ];
 
@@ -40,36 +67,27 @@ const faqs = [
   { q: t('faq2Q'), a: t('faq2A') },
   { q: t('faq3Q'), a: t('faq3A') },
   { q: t('faq4Q'), a: t('faq4A') },
+  { q: t('faq5Q'), a: t('faq5A') },
 ];
-
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  'mainEntity': faqs.map((faq) => ({
-    '@type': 'Question',
-    'name': faq.q,
-    'acceptedAnswer': {
-      '@type': 'Answer',
-      'text': faq.a,
-    },
-  })),
-};
 ---
 
-<section class="w-full max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+<section class="w-full max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
   
-  <!-- Section 1: How to Convert in 4 Steps -->
+  <!-- Section 1: 3-Step Visual Guide -->
   <div class="mb-20 sm:mb-28">
     <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-      <h2 class="text-3xl sm:text-4xl font-black text-palette-obsidian dark:text-palette-alabaster tracking-tight mb-4">
+      <h2 class="text-2xl sm:text-4xl font-black text-palette-obsidian dark:text-palette-alabaster tracking-tight mb-3">
         {t('howToTitle')}
       </h2>
-      <div class="w-20 h-1.5 bg-palette-cobalt dark:bg-palette-sky mx-auto rounded-full"></div>
+      <p class="text-sm sm:text-base text-palette-cobalt dark:text-palette-sky font-semibold">
+        {t('siteTagline')}
+      </p>
+      <div class="w-16 h-1 bg-palette-cobalt dark:bg-palette-sky mx-auto rounded-full mt-4"></div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       {steps.map((step) => (
-        <div class="relative rounded-3xl bg-white dark:bg-palette-darkCard p-6 sm:p-7 border border-palette-sky/30 shadow-md hover:shadow-xl transition-all duration-200 transform hover:-translate-y-1 flex flex-col justify-between">
+        <div class="relative rounded-3xl bg-white dark:bg-palette-darkCard p-6 sm:p-8 border border-palette-sky/30 shadow-md hover:shadow-xl transition-all duration-200 transform hover:-translate-y-1 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-4">
               <span class="text-3xl font-black text-palette-cobalt/30 dark:text-palette-sky/30">
@@ -93,13 +111,74 @@ const faqSchema = {
     </div>
   </div>
 
-  <!-- Section 2: SEO FAQ with Accordion -->
+  <!-- Section 2: Why 100% Client-Side Beats Cloud Converters (Feature Comparison Grid) -->
+  <div class="mb-20 sm:mb-28">
+    <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+      <h2 class="text-2xl sm:text-4xl font-black text-palette-obsidian dark:text-palette-alabaster tracking-tight mb-3">
+        {t('compareTitle')}
+      </h2>
+      <p class="text-sm sm:text-base text-palette-cobalt dark:text-palette-sky font-medium max-w-2xl mx-auto">
+        {t('compareSubtitle')}
+      </p>
+      <div class="w-16 h-1 bg-palette-cobalt dark:bg-palette-sky mx-auto rounded-full mt-4"></div>
+    </div>
+
+    <!-- Responsive Comparison Cards -->
+    <div class="grid grid-cols-1 gap-4 sm:gap-5">
+      {comparisons.map((comp) => (
+        <div class="rounded-3xl bg-white dark:bg-palette-darkCard border border-palette-sky/30 shadow-sm p-5 sm:p-7 transition-all hover:shadow-md">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            
+            <!-- Feature Header & Name -->
+            <div class="lg:w-1/3 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-palette-cobalt/10 dark:bg-palette-sky/15 text-palette-cobalt dark:text-palette-sky flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-bold text-palette-obsidian dark:text-palette-alabaster">
+                {comp.name}
+              </h3>
+            </div>
+
+            <!-- This Converter (Winner - Green badge) -->
+            <div class="lg:w-1/3 p-4 rounded-2xl bg-palette-alabaster/60 dark:bg-palette-darkBox border border-palette-sky/30">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-green-500 text-white text-xs font-bold">✓</span>
+                <span class="text-xs font-extrabold uppercase tracking-wide text-palette-cobalt dark:text-palette-sky">{t('compareUs')}</span>
+              </div>
+              <p class="text-xs sm:text-sm font-medium text-palette-obsidian dark:text-palette-alabaster">
+                {comp.us}
+              </p>
+            </div>
+
+            <!-- Cloud & Traditional Sites (Cross - Red badge) -->
+            <div class="lg:w-1/3 p-4 rounded-2xl bg-red-50/50 dark:bg-red-950/20 border border-red-200/50 dark:border-red-900/40">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-400 text-white text-xs font-bold">✕</span>
+                <span class="text-xs font-extrabold uppercase tracking-wide text-red-600 dark:text-red-400">{t('compareThem')}</span>
+              </div>
+              <p class="text-xs sm:text-sm font-medium text-palette-cobalt dark:text-palette-sky">
+                {comp.them}
+              </p>
+            </div>
+
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Section 3: High-Intent FAQ Accordion (with 9 Target Keywords) -->
   <div class="max-w-4xl mx-auto">
     <div class="text-center mb-12 sm:mb-16">
-      <h2 class="text-3xl sm:text-4xl font-black text-palette-obsidian dark:text-palette-alabaster tracking-tight mb-4">
+      <h2 class="text-2xl sm:text-4xl font-black text-palette-obsidian dark:text-palette-alabaster tracking-tight mb-3">
         {t('faqTitle')}
       </h2>
-      <div class="w-20 h-1.5 bg-palette-cobalt dark:bg-palette-sky mx-auto rounded-full"></div>
+      <p class="text-sm sm:text-base text-palette-cobalt dark:text-palette-sky font-semibold">
+        Everything you need to know about 100% private in-browser MP4 to MP3 extraction.
+      </p>
+      <div class="w-16 h-1 bg-palette-cobalt dark:bg-palette-sky mx-auto rounded-full mt-4"></div>
     </div>
 
     <div class="space-y-4" itemscope itemtype="https://schema.org/FAQPage">
@@ -111,9 +190,12 @@ const faqSchema = {
           itemtype="https://schema.org/Question"
           open={idx === 0}
         >
-          <summary class="flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none text-base sm:text-lg font-bold text-palette-obsidian dark:text-palette-alabaster hover:text-palette-cobalt dark:hover:text-palette-sky transition-colors">
+          <summary
+            class="flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none text-base sm:text-lg font-bold text-palette-obsidian dark:text-palette-alabaster hover:text-palette-cobalt dark:hover:text-palette-sky transition-colors"
+            aria-label={faq.q}
+          >
             <span itemprop="name">{faq.q}</span>
-            <span class="ml-4 flex-shrink-0 w-8 h-8 rounded-full bg-palette-sky/15 text-palette-cobalt dark:text-palette-sky flex items-center justify-center group-open:rotate-180 transition-transform duration-200">
+            <span class="ml-4 flex-shrink-0 w-8 h-8 rounded-full bg-palette-sky/15 text-palette-cobalt dark:text-palette-sky flex items-center justify-center group-open:rotate-180 transition-transform duration-200" aria-hidden="true">
               <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
               </svg>
@@ -132,6 +214,4 @@ const faqSchema = {
     </div>
   </div>
 
-  <!-- Injected JSON-LD for Search Engines -->
-  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 </section>

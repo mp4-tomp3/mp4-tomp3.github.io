@@ -1,18 +1,27 @@
 {
-  "name": "MP4 to MP3 Converter",
+  "id": "/",
+  "name": "MP4 to MP3 Converter Free",
   "short_name": "MP4 to MP3",
-  "description": "100% Client-Side MP4 to MP3 Converter - Free, Fast & Private",
+  "description": "100% Client-Side MP4 to MP3 Converter - Free, Fast, Offline & Private Audio Extractor",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "any",
   "background_color": "#EFECE3",
   "theme_color": "#4A70A9",
-  "orientation": "any",
+  "categories": ["utilities", "productivity", "multimedia", "music"],
   "icons": [
     {
       "src": "/icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ]
 }

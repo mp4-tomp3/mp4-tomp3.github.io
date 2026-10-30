@@ -61,10 +61,11 @@ const t = useTranslations(currentLang);
             class="hidden"
             accept=".mp4,.mov,.webm,.mkv,.avi,.m4v,video/*"
             multiple
+            aria-label={t('btnBrowse')}
           />
 
           <!-- Oversized SVG Cloud / Video Extraction Icon (48px - 64px) -->
-          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-palette-cobalt/10 dark:bg-palette-sky/15 flex items-center justify-center mb-5 border border-palette-cobalt/30 group-hover:scale-110 transition-transform duration-200">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-palette-cobalt/10 dark:bg-palette-sky/15 flex items-center justify-center mb-5 border border-palette-cobalt/30 group-hover:scale-110 transition-transform duration-200" aria-hidden="true">
             <svg class="w-10 h-10 sm:w-12 sm:h-12 text-palette-cobalt dark:text-palette-sky" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path>
               <path d="M12 12v9"></path>
@@ -85,6 +86,7 @@ const t = useTranslations(currentLang);
             <button
               type="button"
               id="btn-browse-trigger"
+              aria-label={t('btnBrowse')}
               class="w-full sm:w-auto px-8 py-4 rounded-full bg-palette-cobalt hover:bg-palette-obsidian text-palette-alabaster dark:bg-palette-sky dark:text-palette-obsidian dark:hover:bg-palette-cobalt dark:hover:text-palette-alabaster font-extrabold text-base sm:text-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95"
             >
               {t('btnBrowse')}
@@ -94,9 +96,10 @@ const t = useTranslations(currentLang);
             <button
               type="button"
               id="btn-demo-trigger"
+              aria-label={t('btnDemo')}
               class="w-full sm:w-auto px-6 py-4 rounded-full bg-palette-alabaster hover:bg-palette-sky/20 text-palette-obsidian dark:bg-palette-darkBox dark:text-palette-alabaster dark:hover:bg-palette-sky/20 border-2 border-palette-sky font-bold text-sm sm:text-base shadow-sm transition-all duration-200 flex items-center justify-center gap-2"
             >
-              <svg class="w-5 h-5 text-palette-cobalt dark:text-palette-sky" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg class="w-5 h-5 text-palette-cobalt dark:text-palette-sky" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <polygon points="5 3 19 12 5 21 5 3"></polygon>
               </svg>
               <span id="demo-btn-label">{t('btnDemo')}</span>
@@ -112,7 +115,7 @@ const t = useTranslations(currentLang);
         <div class="flex items-center justify-between p-4 rounded-2xl bg-palette-alabaster/60 dark:bg-palette-darkBox border border-palette-sky/40 mb-6">
           <div class="flex items-center gap-3 overflow-hidden">
             <div class="w-12 h-12 rounded-xl bg-palette-cobalt text-palette-alabaster flex items-center justify-center shrink-0">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
                 <line x1="7" y1="2" x2="7" y2="22"></line>
                 <line x1="17" y1="2" x2="17" y2="22"></line>
@@ -133,8 +136,9 @@ const t = useTranslations(currentLang);
             id="btn-remove-file"
             class="p-2.5 rounded-full hover:bg-red-100 dark:hover:bg-red-950/40 text-red-500 transition-colors"
             title="Remove file"
+            aria-label="Remove selected video file"
           >
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
@@ -153,11 +157,12 @@ const t = useTranslations(currentLang);
               type="button"
               class="bitrate-pill p-3.5 sm:p-4 rounded-2xl border-2 border-palette-sky/50 bg-white dark:bg-palette-darkBox text-left transition-all hover:border-palette-cobalt"
               data-kbps="128"
+              aria-label={`${t('qualityLabel')}: 128 kbps`}
             >
               <div class="flex items-center justify-between mb-1">
                 <span class="font-extrabold text-lg text-palette-obsidian dark:text-palette-alabaster">{t('quality128')}</span>
                 <span class="pill-check hidden text-palette-cobalt dark:text-palette-sky">
-                  <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                  <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
                 </span>
@@ -170,11 +175,12 @@ const t = useTranslations(currentLang);
               type="button"
               class="bitrate-pill active p-3.5 sm:p-4 rounded-2xl border-2 border-palette-cobalt bg-palette-sky/15 dark:bg-palette-cobalt/20 dark:border-palette-sky text-left transition-all"
               data-kbps="192"
+              aria-label={`${t('qualityLabel')}: 192 kbps`}
             >
               <div class="flex items-center justify-between mb-1">
                 <span class="font-extrabold text-lg text-palette-obsidian dark:text-palette-alabaster">{t('quality192')}</span>
                 <span class="pill-check block text-palette-cobalt dark:text-palette-sky">
-                  <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                  <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
                 </span>
@@ -187,11 +193,12 @@ const t = useTranslations(currentLang);
               type="button"
               class="bitrate-pill p-3.5 sm:p-4 rounded-2xl border-2 border-palette-sky/50 bg-white dark:bg-palette-darkBox text-left transition-all hover:border-palette-cobalt"
               data-kbps="320"
+              aria-label={`${t('qualityLabel')}: 320 kbps`}
             >
               <div class="flex items-center justify-between mb-1">
                 <span class="font-extrabold text-lg text-palette-obsidian dark:text-palette-alabaster">{t('quality320')}</span>
                 <span class="pill-check hidden text-palette-cobalt dark:text-palette-sky">
-                  <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                  <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
                 </span>
@@ -217,25 +224,25 @@ const t = useTranslations(currentLang);
                 <span>{t('trimStart')}</span>
                 <span id="trim-start-val">00:00</span>
               </div>
-              <input type="range" id="trim-start-range" min="0" max="100" value="0" step="0.5" class="w-full" />
+              <input type="range" id="trim-start-range" min="0" max="100" value="0" step="0.5" class="w-full" aria-label={t('trimStart')} />
             </div>
             <div>
               <div class="flex justify-between text-xs font-bold text-palette-cobalt dark:text-palette-sky mb-1">
                 <span>{t('trimEnd')}</span>
                 <span id="trim-end-val">--:--</span>
               </div>
-              <input type="range" id="trim-end-range" min="0" max="100" value="100" step="0.5" class="w-full" />
+              <input type="range" id="trim-end-range" min="0" max="100" value="100" step="0.5" class="w-full" aria-label={t('trimEnd')} />
             </div>
           </div>
 
           <!-- Fade In / Out Toggles -->
           <div class="flex flex-wrap items-center gap-4 sm:gap-6 pt-2 border-t border-palette-sky/20">
             <label class="flex items-center gap-2 cursor-pointer select-none">
-              <input type="checkbox" id="fade-in-check" class="w-4 h-4 rounded text-palette-cobalt focus:ring-palette-cobalt" />
+              <input type="checkbox" id="fade-in-check" class="w-4 h-4 rounded text-palette-cobalt focus:ring-palette-cobalt" aria-label={t('fadeIn')} />
               <span class="text-xs sm:text-sm font-semibold text-palette-obsidian dark:text-palette-alabaster">{t('fadeIn')}</span>
             </label>
             <label class="flex items-center gap-2 cursor-pointer select-none">
-              <input type="checkbox" id="fade-out-check" class="w-4 h-4 rounded text-palette-cobalt focus:ring-palette-cobalt" />
+              <input type="checkbox" id="fade-out-check" class="w-4 h-4 rounded text-palette-cobalt focus:ring-palette-cobalt" aria-label={t('fadeOut')} />
               <span class="text-xs sm:text-sm font-semibold text-palette-obsidian dark:text-palette-alabaster">{t('fadeOut')}</span>
             </label>
           </div>
@@ -245,9 +252,10 @@ const t = useTranslations(currentLang);
         <button
           type="button"
           id="btn-start-convert"
+          aria-label={t('btnConvert')}
           class="w-full py-5 rounded-full bg-palette-cobalt hover:bg-palette-obsidian text-palette-alabaster dark:bg-palette-sky dark:text-palette-obsidian dark:hover:bg-palette-cobalt dark:hover:text-palette-alabaster font-black text-lg sm:text-xl shadow-xl hover:shadow-2xl transition-all duration-200 transform hover:-translate-y-0.5 active:scale-98 flex items-center justify-center gap-3"
         >
-          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
             <polygon points="5 3 19 12 5 21 5 3"></polygon>
           </svg>
           <span>{t('btnConvert')}</span>
@@ -259,7 +267,7 @@ const t = useTranslations(currentLang);
       <div id="step-progress" class="hidden transition-all duration-300 py-6 sm:py-10 text-center">
         
         <!-- Smooth Soundwave / Equalizer Animation in #4A70A9 and #8FABD4 -->
-        <div class="flex items-end justify-center gap-1.5 sm:gap-2 h-24 mb-6">
+        <div class="flex items-end justify-center gap-1.5 sm:gap-2 h-24 mb-6" aria-hidden="true">
           <div class="eq-bar w-2 sm:w-2.5 bg-palette-cobalt rounded-full h-full"></div>
           <div class="eq-bar w-2 sm:w-2.5 bg-palette-sky rounded-full h-full"></div>
           <div class="eq-bar w-2 sm:w-2.5 bg-palette-cobalt rounded-full h-full"></div>
@@ -279,8 +287,12 @@ const t = useTranslations(currentLang);
           <span id="progress-percent">0</span>%
         </div>
 
-        <!-- Real-Time Phase Status Text -->
-        <p id="progress-status" class="text-base sm:text-lg font-bold text-palette-cobalt dark:text-palette-sky mb-4">
+        <!-- Real-Time Phase Status Text with aria-live="polite" -->
+        <p
+          id="progress-status"
+          class="text-base sm:text-lg font-bold text-palette-cobalt dark:text-palette-sky mb-4"
+          aria-live="polite"
+        >
           {t('statusReading')}
         </p>
 
@@ -296,7 +308,7 @@ const t = useTranslations(currentLang);
         
         <div class="text-center mb-6">
           <div class="w-16 h-16 rounded-full bg-green-500/20 text-green-500 mx-auto flex items-center justify-center mb-3">
-            <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+            <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
               <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
           </div>
@@ -313,7 +325,7 @@ const t = useTranslations(currentLang);
           <span class="text-xs font-bold text-palette-cobalt dark:text-palette-sky uppercase tracking-wider">
             {t('previewTitle')}
           </span>
-          <audio id="audio-player" controls class="w-full h-12 focus:outline-none rounded-xl"></audio>
+          <audio id="audio-player" controls class="w-full h-12 focus:outline-none rounded-xl" aria-label={t('previewTitle')}></audio>
         </div>
 
         <!-- Batch conversion list (if multiple files converted) -->
@@ -327,9 +339,10 @@ const t = useTranslations(currentLang);
             id="btn-download-mp3"
             href="#"
             download="audio.mp3"
+            aria-label={t('btnDownload')}
             class="flex-1 py-5 rounded-full bg-palette-cobalt hover:bg-palette-obsidian text-palette-alabaster dark:bg-palette-sky dark:text-palette-obsidian dark:hover:bg-palette-cobalt dark:hover:text-palette-alabaster font-black text-lg sm:text-xl shadow-xl hover:shadow-2xl transition-all duration-200 transform hover:-translate-y-0.5 active:scale-98 flex items-center justify-center gap-3 text-center"
           >
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="7 10 12 15 17 10"></polyline>
               <line x1="12" y1="15" x2="12" y2="3"></line>
@@ -341,9 +354,10 @@ const t = useTranslations(currentLang);
           <button
             type="button"
             id="btn-convert-another"
+            aria-label={t('btnConvertAnother')}
             class="sm:w-auto px-8 py-5 rounded-full bg-palette-alabaster hover:bg-palette-sky/20 text-palette-obsidian dark:bg-palette-darkBox dark:text-palette-alabaster dark:hover:bg-palette-sky/20 border-2 border-palette-sky font-bold text-base shadow-sm transition-all duration-200 flex items-center justify-center gap-2"
           >
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <polyline points="1 4 1 10 7 10"></polyline>
               <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
             </svg>

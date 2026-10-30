@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ConverterBox from '../../components/ConverterBox.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import HowToAndFAQ from '../../components/HowToAndFAQ.astro';
 import { type SupportedLanguage } from '../../i18n/ui';
 
@@ -17,5 +18,6 @@ const currentLang = (lang as SupportedLanguage) || 'en';
 
 <Layout currentLang={currentLang}>
   <ConverterBox currentLang={currentLang} />
+  <Breadcrumb currentLang={currentLang} />
   <HowToAndFAQ currentLang={currentLang} />
 </Layout>
