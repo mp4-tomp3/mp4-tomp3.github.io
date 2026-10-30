@@ -10,13 +10,13 @@ const t = useTranslations(currentLang);
 const homeUrl = currentLang === 'en' ? '/' : `/${currentLang}/`;
 ---
 
-<header class="sticky top-0 z-50 w-full border-b border-palette-sky/30 bg-palette-alabaster/90 dark:bg-palette-obsidian/90 backdrop-blur-md transition-colors duration-200">
+<header class="sticky top-0 z-40 w-full border-b border-palette-sky/30 bg-palette-alabaster/95 dark:bg-palette-obsidian/95 backdrop-blur-md transition-colors duration-200">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
     
     <!-- Brand Logo + Title -->
     <a href={homeUrl} class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-palette-cobalt rounded-xl p-1" aria-label="MP4 to MP3 Homepage">
       <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-palette-cobalt flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-200">
-        <svg class="w-6 h-6 text-palette-alabaster" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="w-6 h-6 text-palette-alabaster" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <polygon points="5 3 19 12 5 21 5 3"></polygon>
         </svg>
       </div>
@@ -24,14 +24,14 @@ const homeUrl = currentLang === 'en' ? '/' : `/${currentLang}/`;
         <span class="font-extrabold text-lg sm:text-xl tracking-tight text-palette-obsidian dark:text-palette-alabaster">
           MP4 <span class="text-palette-cobalt dark:text-palette-sky">to</span> MP3
         </span>
-        <span class="hidden lg:inline text-[11px] font-semibold text-palette-cobalt dark:text-palette-sky uppercase tracking-wider">
+        <span class="hidden sm:inline text-[11px] font-semibold text-palette-cobalt dark:text-palette-sky uppercase tracking-wider">
           100% Client-Side
         </span>
       </div>
     </a>
 
-    <!-- Desktop Navigation (>= 768px) -->
-    <div class="hidden md:flex items-center gap-3 lg:gap-4">
+    <!-- Desktop Navigation (>= 1024px) -->
+    <div class="hidden lg:flex items-center gap-3 lg:gap-4">
       
       <!-- 8-Language Dropdown Selector -->
       <div class="relative group" id="lang-dropdown-wrapper">
@@ -82,7 +82,7 @@ const homeUrl = currentLang === 'en' ? '/' : `/${currentLang}/`;
         </div>
       </div>
 
-      <!-- Light / Dark Mode Toggle -->
+      <!-- Light / Dark Mode Toggle (Desktop) -->
       <button
         type="button"
         id="theme-toggle-desktop"
@@ -108,13 +108,13 @@ const homeUrl = currentLang === 'en' ? '/' : `/${currentLang}/`;
         </svg>
       </button>
 
-      <!-- Install PWA Button -->
+      <!-- Install PWA Button (Desktop) -->
       <button
         type="button"
         id="install-pwa-btn"
         aria-label={t('navInstallApp')}
         title={t('navInstallApp')}
-        class="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-full border border-palette-sky/50 bg-white dark:bg-palette-darkCard text-palette-obsidian dark:text-palette-alabaster text-sm font-semibold hover:border-palette-cobalt hover:bg-palette-sky/10 transition-all duration-150 shadow-sm"
+        class="inline-flex items-center gap-2 px-3.5 py-2 rounded-full border border-palette-sky/50 bg-white dark:bg-palette-darkCard text-palette-obsidian dark:text-palette-alabaster text-sm font-semibold hover:border-palette-cobalt hover:bg-palette-sky/10 transition-all duration-150 shadow-sm"
       >
         <svg class="w-4 h-4 text-palette-cobalt dark:text-palette-sky" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -124,7 +124,7 @@ const homeUrl = currentLang === 'en' ? '/' : `/${currentLang}/`;
         <span>{t('navInstallApp')}</span>
       </button>
 
-      <!-- Support the Developer CTA Button -->
+      <!-- Support CTA Button (Desktop) -->
       <a
         href="https://ko-fi.com/kishara"
         target="_blank"
@@ -139,128 +139,203 @@ const homeUrl = currentLang === 'en' ? '/' : `/${currentLang}/`;
       </a>
     </div>
 
-    <!-- Mobile & Tablet Navbar (< 768px): STRICT ULTRA-MINIMAL ICON-ONLY BAR -->
-    <!-- Oversized, high-touch-target (48x48px) crisp SVG icons only with full aria-label support -->
-    <div class="flex md:hidden items-center gap-1.5 sm:gap-2">
+    <!-- Tablet & Mobile Viewport (< 1024px): Clean, Highly Responsive Toggle Bar -->
+    <div class="flex lg:hidden items-center gap-2">
       
-      <!-- 1. Globe Language Icon (48x48px) -->
-      <button
-        type="button"
-        id="mobile-lang-trigger"
-        aria-label={t('navLanguage')}
-        title={t('navLanguage')}
-        class="w-12 h-12 flex items-center justify-center rounded-xl bg-white/80 dark:bg-palette-darkCard/80 border border-palette-sky/40 text-palette-cobalt dark:text-palette-sky hover:bg-palette-sky/20 active:scale-95 transition-all shadow-sm"
-      >
-        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="2" y1="12" x2="22" y2="12"></line>
-          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-        </svg>
-      </button>
-
-      <!-- 2. Sun/Moon Theme Icon (48x48px) -->
-      <button
-        type="button"
-        id="theme-toggle-mobile"
-        aria-label={t('navTheme')}
-        title={t('navTheme')}
-        class="w-12 h-12 flex items-center justify-center rounded-xl bg-white/80 dark:bg-palette-darkCard/80 border border-palette-sky/40 text-palette-cobalt dark:text-palette-sky hover:bg-palette-sky/20 active:scale-95 transition-all shadow-sm"
-      >
-        <svg class="w-6 h-6 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="5"></circle>
-          <line x1="12" y1="1" x2="12" y2="3"></line>
-          <line x1="12" y1="21" x2="12" y2="23"></line>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-          <line x1="1" y1="12" x2="3" y2="12"></line>
-          <line x1="21" y1="12" x2="23" y2="12"></line>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-        </svg>
-        <svg class="w-6 h-6 block dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-      </button>
-
-      <!-- 3. Install App Icon (48x48px) -->
-      <button
-        type="button"
-        id="mobile-install-btn"
-        aria-label={t('navInstallApp')}
-        title={t('navInstallApp')}
-        class="w-12 h-12 flex items-center justify-center rounded-xl bg-white/80 dark:bg-palette-darkCard/80 border border-palette-sky/40 text-palette-cobalt dark:text-palette-sky hover:bg-palette-sky/20 active:scale-95 transition-all shadow-sm"
-      >
-        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-          <polyline points="7 10 12 15 17 10"></polyline>
-          <line x1="12" y1="15" x2="12" y2="3"></line>
-        </svg>
-      </button>
-
-      <!-- 4. Ko-fi Heart Icon (48x48px) -->
+      <!-- 1-Tap Quick Support Ko-fi Heart Button (48x48px) -->
       <a
         href="https://ko-fi.com/kishara"
         target="_blank"
         rel="noopener noreferrer"
         aria-label={t('navSupport')}
         title={t('navSupport')}
-        class="w-12 h-12 flex items-center justify-center rounded-xl bg-palette-cobalt dark:bg-palette-sky text-palette-alabaster dark:text-palette-obsidian hover:scale-105 active:scale-95 transition-all shadow-md"
+        class="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center rounded-2xl bg-palette-cobalt dark:bg-palette-sky text-palette-alabaster dark:text-palette-obsidian hover:scale-105 active:scale-95 transition-all shadow-md"
       >
-        <svg class="w-6 h-6 fill-current text-red-300 dark:text-red-700 animate-pulse" viewBox="0 0 24 24" aria-hidden="true">
+        <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-current text-red-300 dark:text-red-700 animate-pulse" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
         </svg>
       </a>
+
+      <!-- Primary Mobile & Tablet Toggle Button (48x48px) -->
+      <button
+        type="button"
+        id="mobile-menu-toggle"
+        aria-label={t('navMenu')}
+        aria-expanded="false"
+        aria-controls="mobile-nav-drawer"
+        class="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center rounded-2xl bg-white dark:bg-palette-darkCard border-2 border-palette-sky/50 text-palette-cobalt dark:text-palette-sky hover:border-palette-cobalt hover:bg-palette-sky/10 active:scale-95 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-palette-cobalt"
+      >
+        <!-- Hamburger Icon Lines (transitions to X) -->
+        <div class="w-6 h-5 flex flex-col justify-between items-center relative" id="hamburger-icon-wrapper" aria-hidden="true">
+          <span class="w-6 h-0.5 bg-palette-cobalt dark:bg-palette-sky rounded-full transition-all duration-300 transform origin-center line-1"></span>
+          <span class="w-6 h-0.5 bg-palette-cobalt dark:bg-palette-sky rounded-full transition-all duration-300 line-2"></span>
+          <span class="w-6 h-0.5 bg-palette-cobalt dark:bg-palette-sky rounded-full transition-all duration-300 transform origin-center line-3"></span>
+        </div>
+      </button>
+
     </div>
 
   </div>
 </header>
 
-<!-- Mobile Language Modal / Sheet -->
+<!-- Tablet & Mobile Responsive Navigation Drawer / Sheet -->
 <div
-  id="mobile-lang-modal"
-  class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-4 transition-opacity duration-200"
+  id="mobile-nav-drawer"
+  class="fixed inset-0 z-50 hidden transition-opacity duration-300 bg-black/60 backdrop-blur-sm flex justify-end"
   role="dialog"
   aria-modal="true"
-  aria-labelledby="mobile-lang-title"
+  aria-label={t('navMenu')}
 >
-  <div class="w-full max-w-sm bg-white dark:bg-palette-darkCard rounded-3xl p-6 shadow-2xl border border-palette-sky/30 animate-slideUp">
-    <div class="flex items-center justify-between mb-5">
-      <h3 id="mobile-lang-title" class="text-xl font-bold text-palette-obsidian dark:text-palette-alabaster">
-        {t('navLanguage')}
-      </h3>
+  <div
+    id="mobile-drawer-panel"
+    class="w-full max-w-sm sm:max-w-md h-full bg-palette-alabaster dark:bg-palette-darkCard shadow-2xl border-l border-palette-sky/30 flex flex-col p-6 overflow-y-auto transform transition-transform duration-300 translate-x-full"
+  >
+    
+    <!-- Drawer Header -->
+    <div class="flex items-center justify-between pb-5 border-b border-palette-sky/20 mb-6">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-palette-cobalt text-palette-alabaster flex items-center justify-center shadow-md">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+        </div>
+        <div>
+          <h2 class="text-lg font-black text-palette-obsidian dark:text-palette-alabaster">
+            {t('navMenu')}
+          </h2>
+          <span class="text-[11px] font-bold text-palette-cobalt dark:text-palette-sky uppercase tracking-wider">
+            MP4 to MP3 Converter
+          </span>
+        </div>
+      </div>
+
       <button
         type="button"
-        id="mobile-lang-close"
-        aria-label="Close language selector"
-        class="w-10 h-10 flex items-center justify-center rounded-full bg-palette-alabaster dark:bg-palette-darkBox text-palette-obsidian dark:text-palette-alabaster hover:bg-palette-sky/20"
+        id="mobile-nav-close"
+        aria-label="Close navigation menu"
+        class="w-11 h-11 flex items-center justify-center rounded-2xl bg-white dark:bg-palette-darkBox border border-palette-sky/40 text-palette-obsidian dark:text-palette-alabaster hover:bg-palette-sky/20 active:scale-95 transition-all shadow-sm"
       >
-        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
       </button>
     </div>
 
-    <div class="grid grid-cols-2 gap-2.5">
-      {Object.entries(languages).map(([code, info]) => {
-        const isCurrent = code === currentLang;
-        const targetUrl = getLocalizedPath(Astro.url.pathname, code as SupportedLanguage);
-        return (
-          <a
-            href={targetUrl}
-            aria-label={info.name}
-            class={`flex items-center gap-3 p-3.5 rounded-2xl border text-sm font-semibold transition-all ${
-              isCurrent
-                ? 'border-palette-cobalt bg-palette-cobalt/10 text-palette-cobalt dark:text-palette-sky dark:border-palette-sky'
-                : 'border-palette-sky/20 bg-palette-alabaster/40 dark:bg-palette-darkBox text-palette-obsidian dark:text-palette-alabaster hover:border-palette-sky'
-            }`}
-          >
-            <span class="text-2xl" aria-hidden="true">{info.flag}</span>
-            <span>{info.name}</span>
-          </a>
-        );
-      })}
+    <!-- Drawer Navigation Content -->
+    <div class="space-y-6 flex-grow">
+      
+      <!-- 1. Language Selection Section -->
+      <div>
+        <label class="block text-xs font-extrabold uppercase tracking-wider text-palette-cobalt dark:text-palette-sky mb-3">
+          {t('navLanguage')} (8 Languages)
+        </label>
+        <div class="grid grid-cols-2 gap-2" id="mobile-lang-trigger">
+          {Object.entries(languages).map(([code, info]) => {
+            const isCurrent = code === currentLang;
+            const targetUrl = getLocalizedPath(Astro.url.pathname, code as SupportedLanguage);
+            return (
+              <a
+                href={targetUrl}
+                aria-label={info.name}
+                class={`flex items-center gap-2.5 p-3 rounded-2xl border text-xs sm:text-sm font-bold transition-all ${
+                  isCurrent
+                    ? 'border-palette-cobalt bg-palette-cobalt/15 text-palette-cobalt dark:text-palette-sky dark:border-palette-sky shadow-sm'
+                    : 'border-palette-sky/25 bg-white/70 dark:bg-palette-darkBox text-palette-obsidian dark:text-palette-alabaster hover:border-palette-sky'
+                }`}
+              >
+                <span class="text-xl" aria-hidden="true">{info.flag}</span>
+                <span class="truncate">{info.name}</span>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- 2. Theme Toggle Switcher -->
+      <div>
+        <label class="block text-xs font-extrabold uppercase tracking-wider text-palette-cobalt dark:text-palette-sky mb-3">
+          {t('navTheme')}
+        </label>
+        <button
+          type="button"
+          id="theme-toggle-mobile"
+          aria-label={t('navTheme')}
+          class="w-full flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-palette-darkBox border-2 border-palette-sky/40 text-palette-obsidian dark:text-palette-alabaster font-bold text-sm shadow-sm hover:border-palette-cobalt transition-all"
+        >
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-xl bg-palette-sky/15 flex items-center justify-center text-palette-cobalt dark:text-palette-sky">
+              <svg class="w-5 h-5 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+              <svg class="w-5 h-5 block dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            </div>
+            <span id="theme-label-mobile">Switch Mode</span>
+          </div>
+          <span class="text-xs px-2.5 py-1 rounded-full bg-palette-cobalt/10 dark:bg-palette-sky/20 text-palette-cobalt dark:text-palette-sky font-semibold">
+            Toggle
+          </span>
+        </button>
+      </div>
+
+      <!-- 3. Add to Home Screen (PWA Install Button) -->
+      <div>
+        <label class="block text-xs font-extrabold uppercase tracking-wider text-palette-cobalt dark:text-palette-sky mb-3">
+          Progressive Web App
+        </label>
+        <button
+          type="button"
+          id="mobile-install-btn"
+          aria-label={t('navInstallApp')}
+          class="w-full flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-palette-darkBox border-2 border-palette-sky/40 text-palette-obsidian dark:text-palette-alabaster font-bold text-sm shadow-sm hover:border-palette-cobalt transition-all"
+        >
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-xl bg-palette-sky/15 flex items-center justify-center text-palette-cobalt dark:text-palette-sky">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            </div>
+            <span>{t('navInstallApp')}</span>
+          </div>
+          <span class="text-xs px-2.5 py-1 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 font-semibold">
+            Offline Ready
+          </span>
+        </button>
+      </div>
+
     </div>
+
+    <!-- Drawer Footer: Support CTA Button -->
+    <div class="pt-6 border-t border-palette-sky/20 mt-6">
+      <a
+        href="https://ko-fi.com/kishara"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={t('navSupport')}
+        class="w-full py-4 rounded-2xl bg-palette-cobalt hover:bg-palette-obsidian text-palette-alabaster dark:bg-palette-sky dark:text-palette-obsidian dark:hover:bg-palette-cobalt dark:hover:text-palette-alabaster font-extrabold text-sm sm:text-base shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2.5"
+      >
+        <svg class="w-5 h-5 fill-current text-red-300 dark:text-red-700 animate-pulse" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        <span>{t('navSupport')}</span>
+      </a>
+      <p class="text-[11px] text-center text-palette-cobalt/80 dark:text-palette-sky/80 mt-3 font-semibold">
+        100% In-Browser Execution • Zero Uploads
+      </p>
+    </div>
+
   </div>
 </div>
 
@@ -328,28 +403,85 @@ const homeUrl = currentLang === 'en' ? '/' : `/${currentLang}/`;
 <script>
   // Theme Toggle logic (Light / Dark)
   function initTheme() {
+    const updateThemeLabel = (isDark: boolean) => {
+      const label = document.getElementById('theme-label-mobile');
+      if (label) {
+        label.textContent = isDark ? 'Dark Mode (Active)' : 'Light Mode (Active)';
+      }
+    };
+
+    const isCurrentDark = document.documentElement.classList.contains('dark');
+    updateThemeLabel(isCurrentDark);
+
     const handleToggle = () => {
       const isDark = document.documentElement.classList.toggle('dark');
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      updateThemeLabel(isDark);
     };
 
     document.getElementById('theme-toggle-desktop')?.addEventListener('click', handleToggle);
     document.getElementById('theme-toggle-mobile')?.addEventListener('click', handleToggle);
   }
 
-  // Mobile Language Modal logic
-  function initMobileLangModal() {
-    const trigger = document.getElementById('mobile-lang-trigger');
-    const modal = document.getElementById('mobile-lang-modal');
-    const closeBtn = document.getElementById('mobile-lang-close');
+  // Tablet & Mobile Drawer Navigation logic
+  function initResponsiveNavDrawer() {
+    const toggleBtn = document.getElementById('mobile-menu-toggle');
+    const drawer = document.getElementById('mobile-nav-drawer');
+    const panel = document.getElementById('mobile-drawer-panel');
+    const closeBtn = document.getElementById('mobile-nav-close');
+    const hamburger = document.getElementById('hamburger-icon-wrapper');
 
-    const openModal = () => modal?.classList.remove('hidden');
-    const closeModal = () => modal?.classList.add('hidden');
+    let isOpen = false;
 
-    trigger?.addEventListener('click', openModal);
-    closeBtn?.addEventListener('click', closeModal);
-    modal?.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
+    const openDrawer = () => {
+      isOpen = true;
+      toggleBtn?.setAttribute('aria-expanded', 'true');
+      drawer?.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+
+      // Trigger animation frame for slide-in
+      requestAnimationFrame(() => {
+        panel?.classList.remove('translate-x-full');
+      });
+
+      // Transform hamburger to X
+      hamburger?.querySelector('.line-1')?.classList.add('rotate-45', 'translate-y-2');
+      hamburger?.querySelector('.line-2')?.classList.add('opacity-0');
+      hamburger?.querySelector('.line-3')?.classList.add('-rotate-45', '-translate-y-2');
+    };
+
+    const closeDrawer = () => {
+      isOpen = false;
+      toggleBtn?.setAttribute('aria-expanded', 'false');
+      panel?.classList.add('translate-x-full');
+      document.body.style.overflow = '';
+
+      // Revert hamburger lines
+      hamburger?.querySelector('.line-1')?.classList.remove('rotate-45', 'translate-y-2');
+      hamburger?.querySelector('.line-2')?.classList.remove('opacity-0');
+      hamburger?.querySelector('.line-3')?.classList.remove('-rotate-45', '-translate-y-2');
+
+      setTimeout(() => {
+        if (!isOpen) drawer?.classList.add('hidden');
+      }, 300);
+    };
+
+    toggleBtn?.addEventListener('click', () => {
+      if (isOpen) {
+        closeDrawer();
+      } else {
+        openDrawer();
+      }
+    });
+
+    closeBtn?.addEventListener('click', closeDrawer);
+    drawer?.addEventListener('click', (e) => {
+      if (e.target === drawer) closeDrawer();
+    });
+
+    // Close on Escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) closeDrawer();
     });
   }
 
@@ -392,6 +524,6 @@ const homeUrl = currentLang === 'en' ? '/' : `/${currentLang}/`;
 
   // Initialize on load
   initTheme();
-  initMobileLangModal();
+  initResponsiveNavDrawer();
   initPwaModal();
 </script>
