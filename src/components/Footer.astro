@@ -1,0 +1,72 @@
+---
+import { languages, type SupportedLanguage, useTranslations, getLocalizedPath } from '../i18n/ui';
+
+interface Props {
+  currentLang: SupportedLanguage;
+}
+
+const { currentLang } = Astro.props;
+const t = useTranslations(currentLang);
+const year = new Date().getFullYear();
+---
+
+<footer class="w-full border-t border-palette-sky/30 bg-white/60 dark:bg-palette-darkCard/60 backdrop-blur-md py-12 px-4 sm:px-6 transition-colors duration-200">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+    
+    <!-- Brand & Privacy Notice -->
+    <div class="flex flex-col items-center md:items-start text-center md:text-left gap-2">
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-lg bg-palette-cobalt flex items-center justify-center">
+          <svg class="w-4 h-4 text-palette-alabaster" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+        </div>
+        <span class="font-extrabold text-base text-palette-obsidian dark:text-palette-alabaster">
+          MP4 <span class="text-palette-cobalt dark:text-palette-sky">to</span> MP3
+        </span>
+      </div>
+      <p class="text-xs text-palette-cobalt dark:text-palette-sky max-w-sm">
+        {t('footerPrivacyNote')}
+      </p>
+      <p class="text-[11px] text-palette-cobalt/70 dark:text-palette-sky/70">
+        © {year} {t('footerRights')}
+      </p>
+    </div>
+
+    <!-- Quick Language Links -->
+    <div class="flex flex-wrap justify-center gap-3 text-xs font-semibold text-palette-cobalt dark:text-palette-sky">
+      {Object.entries(languages).map(([code, info]) => {
+        const isCurrent = code === currentLang;
+        const targetUrl = getLocalizedPath(Astro.url.pathname, code as SupportedLanguage);
+        return (
+          <a
+            href={targetUrl}
+            class={`px-2.5 py-1 rounded-full transition-colors ${
+              isCurrent
+                ? 'bg-palette-cobalt text-palette-alabaster dark:bg-palette-sky dark:text-palette-obsidian'
+                : 'hover:bg-palette-sky/20'
+            }`}
+          >
+            {info.name}
+          </a>
+        );
+      })}
+    </div>
+
+    <!-- Support Link -->
+    <div>
+      <a
+        href="https://ko-fi.com/kishara"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-palette-sky bg-white dark:bg-palette-darkBox text-palette-cobalt dark:text-palette-sky hover:border-palette-cobalt text-xs font-bold transition-all shadow-sm"
+      >
+        <svg class="w-3.5 h-3.5 fill-current text-red-500" viewBox="0 0 24 24">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        <span>{t('navSupport')}</span>
+      </a>
+    </div>
+
+  </div>
+</footer>

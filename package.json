@@ -1,0 +1,29 @@
+{
+  "name": "mp4-tomp3.github.io",
+  "version": "1.0.0",
+  "description": "100% Client-Side MP4 to MP3 Converter - Fast, Private, Zero Uploads",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mp4-tomp3/mp4-tomp3.github.io.git"
+  },
+  "keywords": ["mp4-to-mp3", "audio-converter", "client-side", "wasm", "web-audio-api"],
+  "author": "Kishara",
+  "license": "MIT",
+  "dependencies": {
+    "@astrojs/tailwind": "^6.0.2",
+    "@breezystack/lamejs": "^1.2.7",
+    "astro": "^5.18.2",
+    "canvas-confetti": "^1.9.4",
+    "tailwindcss": "^3.4.19"
+  },
+  "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0"
+  }
+}

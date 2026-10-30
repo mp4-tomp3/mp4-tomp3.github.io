@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A70A9" />
+      <stop offset="100%" stop-color="#000000" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8FABD4" />
+      <stop offset="100%" stop-color="#EFECE3" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="url(#brandGrad)" />
+  <!-- Video Frame Outline -->
+  <rect x="76" y="116" width="160" height="280" rx="28" stroke="#8FABD4" stroke-width="16" fill="#111823" fill-opacity="0.6"/>
+  <!-- Film perforation dots -->
+  <circle cx="106" cy="156" r="10" fill="#8FABD4" />
+  <circle cx="106" cy="206" r="10" fill="#8FABD4" />
+  <circle cx="106" cy="256" r="10" fill="#8FABD4" />
+  <circle cx="106" cy="306" r="10" fill="#8FABD4" />
+  <circle cx="106" cy="356" r="10" fill="#8FABD4" />
+  <!-- Play triangle in video -->
+  <polygon points="156,236 156,276 192,256" fill="#EFECE3" />
+  
+  <!-- Arrow right transitioning to Audio -->
+  <path d="M256 236 L286 256 L256 276" stroke="#8FABD4" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Music Note / Audio Disk -->
+  <circle cx="376" cy="256" r="80" stroke="url(#accentGrad)" stroke-width="16" fill="#0B1017" />
+  <!-- Musical notes in circle -->
+  <path d="M360 270 V225 C360 220 375 215 395 210 V255" stroke="#EFECE3" stroke-width="12" stroke-linecap="round" />
+  <circle cx="350" cy="275" r="18" fill="#8FABD4" />
+  <circle cx="385" cy="265" r="18" fill="#8FABD4" />
+  <!-- Soundwaves -->
+  <path d="M425 210 C445 230 445 280 425 300" stroke="#8FABD4" stroke-width="10" stroke-linecap="round" />
+</svg>

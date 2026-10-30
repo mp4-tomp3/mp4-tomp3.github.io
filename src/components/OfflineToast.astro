@@ -1,0 +1,79 @@
+---
+import { type SupportedLanguage, useTranslations } from '../i18n/ui';
+
+interface Props {
+  currentLang: SupportedLanguage;
+}
+
+const { currentLang } = Astro.props;
+const t = useTranslations(currentLang);
+---
+
+<div
+  id="offline-toast"
+  class="fixed bottom-6 right-6 z-50 transform translate-y-32 opacity-0 transition-all duration-300 pointer-events-none max-w-sm"
+>
+  <div class="flex items-center gap-3 p-4 rounded-2xl bg-palette-obsidian/95 dark:bg-palette-alabaster text-palette-alabaster dark:text-palette-obsidian shadow-2xl border border-palette-sky/40 backdrop-blur-md">
+    <div id="toast-icon-offline" class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="1" y1="1" x2="23" y2="23"></line>
+        <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+        <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
+        <path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path>
+        <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+        <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+        <line x1="12" y1="20" x2="12.01" y2="20"></line>
+      </svg>
+    </div>
+    <div id="toast-icon-online" class="w-8 h-8 rounded-xl bg-green-500/20 text-green-400 hidden items-center justify-center shrink-0">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+        <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+        <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+        <line x1="12" y1="20" x2="12.01" y2="20"></line>
+      </svg>
+    </div>
+    <div>
+      <p id="toast-msg" class="text-xs sm:text-sm font-bold">
+        {t('offlineToast')}
+      </p>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ offlineMsg: t('offlineToast'), onlineMsg: t('onlineToast') }}>
+  const toast = document.getElementById('offline-toast');
+  const toastMsg = document.getElementById('toast-msg');
+  const iconOffline = document.getElementById('toast-icon-offline');
+  const iconOnline = document.getElementById('toast-icon-online');
+
+  let toastTimer;
+
+  function showToast(isOnline) {
+    if (!toast || !toastMsg) return;
+
+    clearTimeout(toastTimer);
+    if (isOnline) {
+      toastMsg.textContent = onlineMsg;
+      iconOffline?.classList.add('hidden');
+      iconOnline?.classList.remove('hidden');
+      iconOnline?.classList.add('flex');
+    } else {
+      toastMsg.textContent = offlineMsg;
+      iconOnline?.classList.add('hidden');
+      iconOffline?.classList.remove('hidden');
+      iconOffline?.classList.add('flex');
+    }
+
+    toast.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('translate-y-0', 'opacity-100');
+      toast.classList.add('translate-y-32', 'opacity-0', 'pointer-events-none');
+    }, 4500);
+  }
+
+  window.addEventListener('offline', () => showToast(false));
+  window.addEventListener('online', () => showToast(true));
+</script>

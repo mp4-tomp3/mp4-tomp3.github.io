@@ -1,0 +1,137 @@
+---
+import { type SupportedLanguage, useTranslations } from '../i18n/ui';
+
+interface Props {
+  currentLang: SupportedLanguage;
+}
+
+const { currentLang } = Astro.props;
+const t = useTranslations(currentLang);
+
+const steps = [
+  {
+    num: '01',
+    title: t('step1Title'),
+    desc: t('step1Desc'),
+    icon: 'M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z',
+  },
+  {
+    num: '02',
+    title: t('step2Title'),
+    desc: t('step2Desc'),
+    icon: 'M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4',
+  },
+  {
+    num: '03',
+    title: t('step3Title'),
+    desc: t('step3Desc'),
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+  },
+  {
+    num: '04',
+    title: t('step4Title'),
+    desc: t('step4Desc'),
+    icon: 'M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4',
+  },
+];
+
+const faqs = [
+  { q: t('faq1Q'), a: t('faq1A') },
+  { q: t('faq2Q'), a: t('faq2A') },
+  { q: t('faq3Q'), a: t('faq3A') },
+  { q: t('faq4Q'), a: t('faq4A') },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': faqs.map((faq) => ({
+    '@type': 'Question',
+    'name': faq.q,
+    'acceptedAnswer': {
+      '@type': 'Answer',
+      'text': faq.a,
+    },
+  })),
+};
+---
+
+<section class="w-full max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+  
+  <!-- Section 1: How to Convert in 4 Steps -->
+  <div class="mb-20 sm:mb-28">
+    <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+      <h2 class="text-3xl sm:text-4xl font-black text-palette-obsidian dark:text-palette-alabaster tracking-tight mb-4">
+        {t('howToTitle')}
+      </h2>
+      <div class="w-20 h-1.5 bg-palette-cobalt dark:bg-palette-sky mx-auto rounded-full"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {steps.map((step) => (
+        <div class="relative rounded-3xl bg-white dark:bg-palette-darkCard p-6 sm:p-7 border border-palette-sky/30 shadow-md hover:shadow-xl transition-all duration-200 transform hover:-translate-y-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-3xl font-black text-palette-cobalt/30 dark:text-palette-sky/30">
+                {step.num}
+              </span>
+              <div class="w-12 h-12 rounded-2xl bg-palette-sky/15 text-palette-cobalt dark:text-palette-sky flex items-center justify-center">
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d={step.icon}></path>
+                </svg>
+              </div>
+            </div>
+            <h3 class="text-xl font-extrabold text-palette-obsidian dark:text-palette-alabaster mb-2.5">
+              {step.title}
+            </h3>
+            <p class="text-sm text-palette-cobalt dark:text-palette-sky leading-relaxed">
+              {step.desc}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Section 2: SEO FAQ with Accordion -->
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-12 sm:mb-16">
+      <h2 class="text-3xl sm:text-4xl font-black text-palette-obsidian dark:text-palette-alabaster tracking-tight mb-4">
+        {t('faqTitle')}
+      </h2>
+      <div class="w-20 h-1.5 bg-palette-cobalt dark:bg-palette-sky mx-auto rounded-full"></div>
+    </div>
+
+    <div class="space-y-4" itemscope itemtype="https://schema.org/FAQPage">
+      {faqs.map((faq, idx) => (
+        <details
+          class="group rounded-2xl bg-white dark:bg-palette-darkCard border border-palette-sky/30 shadow-sm transition-all duration-200 overflow-hidden"
+          itemscope
+          itemprop="mainEntity"
+          itemtype="https://schema.org/Question"
+          open={idx === 0}
+        >
+          <summary class="flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none text-base sm:text-lg font-bold text-palette-obsidian dark:text-palette-alabaster hover:text-palette-cobalt dark:hover:text-palette-sky transition-colors">
+            <span itemprop="name">{faq.q}</span>
+            <span class="ml-4 flex-shrink-0 w-8 h-8 rounded-full bg-palette-sky/15 text-palette-cobalt dark:text-palette-sky flex items-center justify-center group-open:rotate-180 transition-transform duration-200">
+              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </span>
+          </summary>
+          <div
+            class="px-5 pb-6 sm:px-6 sm:pb-7 text-sm sm:text-base text-palette-cobalt dark:text-palette-sky leading-relaxed border-t border-palette-sky/10 pt-4"
+            itemscope
+            itemprop="acceptedAnswer"
+            itemtype="https://schema.org/Answer"
+          >
+            <p itemprop="text">{faq.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+
+  <!-- Injected JSON-LD for Search Engines -->
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</section>

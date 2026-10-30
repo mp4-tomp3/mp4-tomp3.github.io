@@ -1,0 +1,317 @@
+---
+import { languages, type SupportedLanguage, useTranslations, getLocalizedPath } from '../i18n/ui';
+
+interface Props {
+  currentLang: SupportedLanguage;
+}
+
+const { currentLang } = Astro.props;
+const t = useTranslations(currentLang);
+const homeUrl = currentLang === 'en' ? '/' : `/${currentLang}/`;
+---
+
+<header class="sticky top-0 z-50 w-full border-b border-palette-sky/30 bg-palette-alabaster/90 dark:bg-palette-obsidian/90 backdrop-blur-md transition-colors duration-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
+    
+    <!-- Brand Logo + Title -->
+    <a href={homeUrl} class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-palette-cobalt rounded-xl p-1">
+      <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-palette-cobalt flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-200">
+        <svg class="w-6 h-6 text-palette-alabaster" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+      </div>
+      <div class="flex flex-col">
+        <span class="font-extrabold text-lg sm:text-xl tracking-tight text-palette-obsidian dark:text-palette-alabaster">
+          MP4 <span class="text-palette-cobalt dark:text-palette-sky">to</span> MP3
+        </span>
+        <span class="hidden lg:inline text-[11px] font-semibold text-palette-cobalt dark:text-palette-sky uppercase tracking-wider">
+          100% Client-Side
+        </span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation (>= 768px) -->
+    <div class="hidden md:flex items-center gap-3 lg:gap-4">
+      
+      <!-- 8-Language Dropdown Selector -->
+      <div class="relative group" id="lang-dropdown-wrapper">
+        <button
+          type="button"
+          id="lang-dropdown-btn"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-label={t('navLanguage')}
+          class="flex items-center gap-2 px-3.5 py-2 rounded-full border border-palette-sky/50 bg-white dark:bg-palette-darkCard text-palette-obsidian dark:text-palette-alabaster text-sm font-semibold hover:border-palette-cobalt hover:bg-palette-sky/10 transition-all duration-150 shadow-sm"
+        >
+          <span class="text-base">{languages[currentLang].flag}</span>
+          <span>{languages[currentLang].name}</span>
+          <svg class="w-4 h-4 text-palette-cobalt dark:text-palette-sky transition-transform group-hover:rotate-180" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+
+        <div
+          id="lang-menu"
+          class="hidden group-hover:block hover:block absolute right-0 mt-1 w-48 bg-white dark:bg-palette-darkCard rounded-2xl shadow-xl border border-palette-sky/40 py-2 z-50 backdrop-blur-xl animate-fadeIn"
+        >
+          {Object.entries(languages).map(([code, info]) => {
+            const isCurrent = code === currentLang;
+            const targetUrl = getLocalizedPath(Astro.url.pathname, code as SupportedLanguage);
+            return (
+              <a
+                href={targetUrl}
+                class={`flex items-center justify-between px-4 py-2.5 text-sm transition-colors ${
+                  isCurrent
+                    ? 'font-bold bg-palette-sky/20 text-palette-cobalt dark:text-palette-sky'
+                    : 'text-palette-obsidian dark:text-palette-alabaster hover:bg-palette-alabaster dark:hover:bg-palette-darkBox'
+                }`}
+              >
+                <span class="flex items-center gap-2.5">
+                  <span class="text-base">{info.flag}</span>
+                  <span>{info.name}</span>
+                </span>
+                {isCurrent && (
+                  <svg class="w-4 h-4 text-palette-cobalt dark:text-palette-sky" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                )}
+              </a>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- Light / Dark Mode Toggle -->
+      <button
+        type="button"
+        id="theme-toggle-desktop"
+        aria-label={t('navTheme')}
+        title={t('navTheme')}
+        class="p-2.5 rounded-full border border-palette-sky/50 bg-white dark:bg-palette-darkCard text-palette-obsidian dark:text-palette-alabaster hover:border-palette-cobalt hover:bg-palette-sky/10 transition-all duration-150 shadow-sm"
+      >
+        <!-- Sun icon (shown in dark mode) -->
+        <svg class="w-5 h-5 hidden dark:block text-palette-sky" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <!-- Moon icon (shown in light mode) -->
+        <svg class="w-5 h-5 block dark:hidden text-palette-cobalt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
+      <!-- Install PWA Button -->
+      <button
+        type="button"
+        id="install-pwa-btn"
+        aria-label={t('navInstallApp')}
+        title={t('navInstallApp')}
+        class="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-full border border-palette-sky/50 bg-white dark:bg-palette-darkCard text-palette-obsidian dark:text-palette-alabaster text-sm font-semibold hover:border-palette-cobalt hover:bg-palette-sky/10 transition-all duration-150 shadow-sm"
+      >
+        <svg class="w-4 h-4 text-palette-cobalt dark:text-palette-sky" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <span>{t('navInstallApp')}</span>
+      </button>
+
+      <!-- Support the Developer CTA Button -->
+      <a
+        href="https://ko-fi.com/kishara"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={t('navSupport')}
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-palette-cobalt hover:bg-palette-obsidian text-palette-alabaster dark:bg-palette-sky dark:text-palette-obsidian dark:hover:bg-palette-cobalt dark:hover:text-palette-alabaster text-sm font-bold shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5"
+      >
+        <svg class="w-4 h-4 fill-current text-red-300 dark:text-red-600 animate-pulse" viewBox="0 0 24 24">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        <span>{t('navSupport')}</span>
+      </a>
+    </div>
+
+    <!-- Mobile & Tablet Navbar (< 768px): STRICT ULTRA-MINIMAL ICON-ONLY BAR -->
+    <!-- Oversized, high-touch-target (48x48px) crisp SVG icons only with full aria-label support -->
+    <div class="flex md:hidden items-center gap-1.5 sm:gap-2">
+      
+      <!-- 1. Globe Language Icon (48x48px) -->
+      <button
+        type="button"
+        id="mobile-lang-trigger"
+        aria-label={t('navLanguage')}
+        title={t('navLanguage')}
+        class="w-12 h-12 flex items-center justify-center rounded-xl bg-white/80 dark:bg-palette-darkCard/80 border border-palette-sky/40 text-palette-cobalt dark:text-palette-sky hover:bg-palette-sky/20 active:scale-95 transition-all shadow-sm"
+      >
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+      </button>
+
+      <!-- 2. Sun/Moon Theme Icon (48x48px) -->
+      <button
+        type="button"
+        id="theme-toggle-mobile"
+        aria-label={t('navTheme')}
+        title={t('navTheme')}
+        class="w-12 h-12 flex items-center justify-center rounded-xl bg-white/80 dark:bg-palette-darkCard/80 border border-palette-sky/40 text-palette-cobalt dark:text-palette-sky hover:bg-palette-sky/20 active:scale-95 transition-all shadow-sm"
+      >
+        <svg class="w-6 h-6 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="w-6 h-6 block dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
+      <!-- 3. Install App Icon (48x48px) -->
+      <button
+        type="button"
+        id="mobile-install-btn"
+        aria-label={t('navInstallApp')}
+        title={t('navInstallApp')}
+        class="w-12 h-12 flex items-center justify-center rounded-xl bg-white/80 dark:bg-palette-darkCard/80 border border-palette-sky/40 text-palette-cobalt dark:text-palette-sky hover:bg-palette-sky/20 active:scale-95 transition-all shadow-sm"
+      >
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+      </button>
+
+      <!-- 4. Ko-fi Heart Icon (48x48px) -->
+      <a
+        href="https://ko-fi.com/kishara"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={t('navSupport')}
+        title={t('navSupport')}
+        class="w-12 h-12 flex items-center justify-center rounded-xl bg-palette-cobalt dark:bg-palette-sky text-palette-alabaster dark:text-palette-obsidian hover:scale-105 active:scale-95 transition-all shadow-md"
+      >
+        <svg class="w-6 h-6 fill-current text-red-300 dark:text-red-700 animate-pulse" viewBox="0 0 24 24">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</header>
+
+<!-- Mobile Language Modal / Sheet -->
+<div
+  id="mobile-lang-modal"
+  class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-4 transition-opacity duration-200"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="mobile-lang-title"
+>
+  <div class="w-full max-w-sm bg-white dark:bg-palette-darkCard rounded-3xl p-6 shadow-2xl border border-palette-sky/30 animate-slideUp">
+    <div class="flex items-center justify-between mb-5">
+      <h3 id="mobile-lang-title" class="text-xl font-bold text-palette-obsidian dark:text-palette-alabaster">
+        {t('navLanguage')}
+      </h3>
+      <button
+        type="button"
+        id="mobile-lang-close"
+        aria-label="Close"
+        class="w-10 h-10 flex items-center justify-center rounded-full bg-palette-alabaster dark:bg-palette-darkBox text-palette-obsidian dark:text-palette-alabaster"
+      >
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="grid grid-cols-2 gap-2.5">
+      {Object.entries(languages).map(([code, info]) => {
+        const isCurrent = code === currentLang;
+        const targetUrl = getLocalizedPath(Astro.url.pathname, code as SupportedLanguage);
+        return (
+          <a
+            href={targetUrl}
+            class={`flex items-center gap-3 p-3.5 rounded-2xl border text-sm font-semibold transition-all ${
+              isCurrent
+                ? 'border-palette-cobalt bg-palette-cobalt/10 text-palette-cobalt dark:text-palette-sky dark:border-palette-sky'
+                : 'border-palette-sky/20 bg-palette-alabaster/40 dark:bg-palette-darkBox text-palette-obsidian dark:text-palette-alabaster hover:border-palette-sky'
+            }`}
+          >
+            <span class="text-2xl">{info.flag}</span>
+            <span>{info.name}</span>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</div>
+
+<script>
+  // Theme Toggle logic (Light / Dark)
+  function initTheme() {
+    const handleToggle = () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    };
+
+    document.getElementById('theme-toggle-desktop')?.addEventListener('click', handleToggle);
+    document.getElementById('theme-toggle-mobile')?.addEventListener('click', handleToggle);
+  }
+
+  // Mobile Language Modal logic
+  function initMobileLangModal() {
+    const trigger = document.getElementById('mobile-lang-trigger');
+    const modal = document.getElementById('mobile-lang-modal');
+    const closeBtn = document.getElementById('mobile-lang-close');
+
+    const openModal = () => modal?.classList.remove('hidden');
+    const closeModal = () => modal?.classList.add('hidden');
+
+    trigger?.addEventListener('click', openModal);
+    closeBtn?.addEventListener('click', closeModal);
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+  }
+
+  // PWA Install Prompt handling
+  let deferredPrompt: any = null;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+  });
+
+  function triggerPwaInstall() {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(() => {
+        deferredPrompt = null;
+      });
+    } else {
+      alert('To install this app, tap your browser menu (or share icon) and select "Add to Home Screen".');
+    }
+  }
+
+  document.getElementById('install-pwa-btn')?.addEventListener('click', triggerPwaInstall);
+  document.getElementById('mobile-install-btn')?.addEventListener('click', triggerPwaInstall);
+
+  // Initialize on load
+  initTheme();
+  initMobileLangModal();
+</script>

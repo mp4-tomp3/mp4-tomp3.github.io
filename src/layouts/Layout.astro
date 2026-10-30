@@ -1,0 +1,90 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import OfflineToast from '../components/OfflineToast.astro';
+import { languages, type SupportedLanguage, useTranslations, getLocalizedPath } from '../i18n/ui';
+import '../styles/global.css';
+
+interface Props {
+  currentLang: SupportedLanguage;
+  title?: string;
+  description?: string;
+}
+
+const { currentLang, title, description } = Astro.props;
+const t = useTranslations(currentLang);
+
+const pageTitle = title || t('siteTitle');
+const pageDesc = description || t('siteTagline');
+const siteUrl = 'https://mp4-tomp3.github.io';
+const canonicalUrl = `${siteUrl}${getLocalizedPath(Astro.url.pathname, currentLang)}`;
+---
+
+<!doctype html>
+<html lang={currentLang} dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
+    <meta name="theme-color" content="#4A70A9" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Hreflang alternates for all 8 languages -->
+    {Object.keys(languages).map((code) => {
+      const altUrl = `${siteUrl}${getLocalizedPath(Astro.url.pathname, code as SupportedLanguage)}`;
+      return <link rel="alternate" hreflang={code} href={altUrl} />;
+    })}
+    <link rel="alternate" hreflang="x-default" href={siteUrl} />
+
+    <!-- PWA & Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icon.svg" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- Open Graph & Social Cards -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={`${siteUrl}/icon.svg`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDesc} />
+    <meta name="twitter:image" content={`${siteUrl}/icon.svg`} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Inline Theme Initializer: executes before DOM paint to avoid FOUC -->
+    <script is:inline>
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+  </head>
+  <body class="min-h-screen flex flex-col bg-palette-alabaster dark:bg-palette-obsidian text-palette-obsidian dark:text-palette-alabaster selection:bg-palette-cobalt selection:text-white">
+    <Header currentLang={currentLang} />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <Footer currentLang={currentLang} />
+    <OfflineToast currentLang={currentLang} />
+
+    <!-- Service Worker Registration for 100% Offline PWA operation -->
+    <script is:inline>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+      }
+    </script>
+  </body>
+</html>

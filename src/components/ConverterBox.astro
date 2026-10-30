@@ -1,0 +1,679 @@
+---
+import { type SupportedLanguage, useTranslations } from '../i18n/ui';
+
+interface Props {
+  currentLang: SupportedLanguage;
+}
+
+const { currentLang } = Astro.props;
+const t = useTranslations(currentLang);
+---
+
+<section class="min-h-[calc(100dvh-4.5rem)] sm:min-h-[calc(100dvh-5rem)] flex flex-col justify-center items-center py-6 px-3 sm:px-6 relative overflow-hidden">
+  
+  <!-- Subtle decorative ambient glows in cobalt and sky -->
+  <div class="absolute -top-24 -left-24 w-96 h-96 bg-palette-sky/20 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-palette-cobalt/15 rounded-full blur-3xl pointer-events-none"></div>
+
+  <!-- Main Hero Workspace Div Container -->
+  <div class="w-full max-w-4xl mx-auto flex flex-col items-center z-10">
+
+    <!-- Privacy & Offline Badges -->
+    <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-4 text-center">
+      <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-white dark:bg-palette-darkCard text-palette-cobalt dark:text-palette-sky border border-palette-sky/40 shadow-sm">
+        <svg class="w-4 h-4 text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        {t('badgePrivacy')}
+      </span>
+      <span class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-palette-cobalt/10 text-palette-cobalt dark:bg-palette-sky/15 dark:text-palette-sky border border-palette-cobalt/30">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        {t('badgeOffline')}
+      </span>
+    </div>
+
+    <!-- Big Bold Title & Tagline -->
+    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-center tracking-tight text-palette-obsidian dark:text-palette-alabaster mb-3 leading-[1.15]">
+      {t('siteTitle').split('-')[0].trim()}
+    </h1>
+    <p class="text-base sm:text-xl text-center max-w-2xl text-palette-cobalt dark:text-palette-sky font-medium mb-6 leading-relaxed">
+      {t('siteTagline')}
+    </p>
+
+    <!-- Interactive MP4-to-MP3 Converter Box Card -->
+    <div class="w-full bg-white dark:bg-palette-darkCard rounded-3xl p-5 sm:p-8 md:p-10 shadow-2xl border-2 border-palette-sky/40 backdrop-blur-xl transition-all duration-300">
+      
+      <!-- STEP 1: Interactive Dropzone Box -->
+      <div id="step-dropzone" class="block transition-all duration-300">
+        <div
+          id="dropzone"
+          class="dropzone-border rounded-2xl p-8 sm:p-12 text-center cursor-pointer flex flex-col items-center justify-center relative select-none animate-pulse-subtle"
+          role="button"
+          tabindex="0"
+          aria-label={t('dropTitle')}
+        >
+          <input
+            type="file"
+            id="file-input"
+            class="hidden"
+            accept=".mp4,.mov,.webm,.mkv,.avi,.m4v,video/*"
+            multiple
+          />
+
+          <!-- Oversized SVG Cloud / Video Extraction Icon (48px - 64px) -->
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-palette-cobalt/10 dark:bg-palette-sky/15 flex items-center justify-center mb-5 border border-palette-cobalt/30 group-hover:scale-110 transition-transform duration-200">
+            <svg class="w-10 h-10 sm:w-12 sm:h-12 text-palette-cobalt dark:text-palette-sky" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path>
+              <path d="M12 12v9"></path>
+              <path d="m16 16-4-4-4 4"></path>
+            </svg>
+          </div>
+
+          <!-- Giant Typography -->
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-palette-obsidian dark:text-palette-alabaster mb-2">
+            {t('dropTitle')}
+          </h2>
+          <p class="text-sm sm:text-base text-palette-cobalt dark:text-palette-sky max-w-md font-medium mb-6">
+            {t('dropSubtitle')}
+          </p>
+
+          <!-- Action Buttons in Dropzone -->
+          <div class="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+            <button
+              type="button"
+              id="btn-browse-trigger"
+              class="w-full sm:w-auto px-8 py-4 rounded-full bg-palette-cobalt hover:bg-palette-obsidian text-palette-alabaster dark:bg-palette-sky dark:text-palette-obsidian dark:hover:bg-palette-cobalt dark:hover:text-palette-alabaster font-extrabold text-base sm:text-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95"
+            >
+              {t('btnBrowse')}
+            </button>
+
+            <!-- Try Instant Demo Video Button -->
+            <button
+              type="button"
+              id="btn-demo-trigger"
+              class="w-full sm:w-auto px-6 py-4 rounded-full bg-palette-alabaster hover:bg-palette-sky/20 text-palette-obsidian dark:bg-palette-darkBox dark:text-palette-alabaster dark:hover:bg-palette-sky/20 border-2 border-palette-sky font-bold text-sm sm:text-base shadow-sm transition-all duration-200 flex items-center justify-center gap-2"
+            >
+              <svg class="w-5 h-5 text-palette-cobalt dark:text-palette-sky" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <span id="demo-btn-label">{t('btnDemo')}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: Instant Bitrate & Trim Controls -->
+      <div id="step-controls" class="hidden transition-all duration-300">
+        
+        <!-- Selected Files Summary Card -->
+        <div class="flex items-center justify-between p-4 rounded-2xl bg-palette-alabaster/60 dark:bg-palette-darkBox border border-palette-sky/40 mb-6">
+          <div class="flex items-center gap-3 overflow-hidden">
+            <div class="w-12 h-12 rounded-xl bg-palette-cobalt text-palette-alabaster flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+                <line x1="7" y1="2" x2="7" y2="22"></line>
+                <line x1="17" y1="2" x2="17" y2="22"></line>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+              </svg>
+            </div>
+            <div class="overflow-hidden">
+              <p id="file-info-name" class="font-extrabold text-base sm:text-lg text-palette-obsidian dark:text-palette-alabaster truncate">
+                video.mp4
+              </p>
+              <p id="file-info-meta" class="text-xs sm:text-sm text-palette-cobalt dark:text-palette-sky font-semibold">
+                -- MB • 00:00
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            id="btn-remove-file"
+            class="p-2.5 rounded-full hover:bg-red-100 dark:hover:bg-red-950/40 text-red-500 transition-colors"
+            title="Remove file"
+          >
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Audio Quality / Bitrate Pill Selectors -->
+        <div class="mb-6">
+          <label class="block text-sm sm:text-base font-bold text-palette-obsidian dark:text-palette-alabaster mb-3">
+            {t('qualityLabel')}
+          </label>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            
+            <!-- 128 kbps Standard -->
+            <button
+              type="button"
+              class="bitrate-pill p-3.5 sm:p-4 rounded-2xl border-2 border-palette-sky/50 bg-white dark:bg-palette-darkBox text-left transition-all hover:border-palette-cobalt"
+              data-kbps="128"
+            >
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-extrabold text-lg text-palette-obsidian dark:text-palette-alabaster">{t('quality128')}</span>
+                <span class="pill-check hidden text-palette-cobalt dark:text-palette-sky">
+                  <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+              </div>
+              <p class="text-xs text-palette-cobalt dark:text-palette-sky font-medium">{t('quality128Desc')}</p>
+            </button>
+
+            <!-- 192 kbps High (Default Selected) -->
+            <button
+              type="button"
+              class="bitrate-pill active p-3.5 sm:p-4 rounded-2xl border-2 border-palette-cobalt bg-palette-sky/15 dark:bg-palette-cobalt/20 dark:border-palette-sky text-left transition-all"
+              data-kbps="192"
+            >
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-extrabold text-lg text-palette-obsidian dark:text-palette-alabaster">{t('quality192')}</span>
+                <span class="pill-check block text-palette-cobalt dark:text-palette-sky">
+                  <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+              </div>
+              <p class="text-xs text-palette-cobalt dark:text-palette-sky font-medium">{t('quality192Desc')}</p>
+            </button>
+
+            <!-- 320 kbps Studio Master -->
+            <button
+              type="button"
+              class="bitrate-pill p-3.5 sm:p-4 rounded-2xl border-2 border-palette-sky/50 bg-white dark:bg-palette-darkBox text-left transition-all hover:border-palette-cobalt"
+              data-kbps="320"
+            >
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-extrabold text-lg text-palette-obsidian dark:text-palette-alabaster">{t('quality320')}</span>
+                <span class="pill-check hidden text-palette-cobalt dark:text-palette-sky">
+                  <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+              </div>
+              <p class="text-xs text-palette-cobalt dark:text-palette-sky font-medium">{t('quality320Desc')}</p>
+            </button>
+
+          </div>
+        </div>
+
+        <!-- Optional Audio Trimming & Fade Toggles -->
+        <div class="p-4 sm:p-5 rounded-2xl bg-palette-alabaster/40 dark:bg-palette-darkBox/80 border border-palette-sky/30 mb-8">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-sm sm:text-base font-extrabold text-palette-obsidian dark:text-palette-alabaster">
+              {t('trimTitle')}
+            </span>
+          </div>
+
+          <!-- Sliders -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <div>
+              <div class="flex justify-between text-xs font-bold text-palette-cobalt dark:text-palette-sky mb-1">
+                <span>{t('trimStart')}</span>
+                <span id="trim-start-val">00:00</span>
+              </div>
+              <input type="range" id="trim-start-range" min="0" max="100" value="0" step="0.5" class="w-full" />
+            </div>
+            <div>
+              <div class="flex justify-between text-xs font-bold text-palette-cobalt dark:text-palette-sky mb-1">
+                <span>{t('trimEnd')}</span>
+                <span id="trim-end-val">--:--</span>
+              </div>
+              <input type="range" id="trim-end-range" min="0" max="100" value="100" step="0.5" class="w-full" />
+            </div>
+          </div>
+
+          <!-- Fade In / Out Toggles -->
+          <div class="flex flex-wrap items-center gap-4 sm:gap-6 pt-2 border-t border-palette-sky/20">
+            <label class="flex items-center gap-2 cursor-pointer select-none">
+              <input type="checkbox" id="fade-in-check" class="w-4 h-4 rounded text-palette-cobalt focus:ring-palette-cobalt" />
+              <span class="text-xs sm:text-sm font-semibold text-palette-obsidian dark:text-palette-alabaster">{t('fadeIn')}</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer select-none">
+              <input type="checkbox" id="fade-out-check" class="w-4 h-4 rounded text-palette-cobalt focus:ring-palette-cobalt" />
+              <span class="text-xs sm:text-sm font-semibold text-palette-obsidian dark:text-palette-alabaster">{t('fadeOut')}</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Big Massive Primary Action Button -->
+        <button
+          type="button"
+          id="btn-start-convert"
+          class="w-full py-5 rounded-full bg-palette-cobalt hover:bg-palette-obsidian text-palette-alabaster dark:bg-palette-sky dark:text-palette-obsidian dark:hover:bg-palette-cobalt dark:hover:text-palette-alabaster font-black text-lg sm:text-xl shadow-xl hover:shadow-2xl transition-all duration-200 transform hover:-translate-y-0.5 active:scale-98 flex items-center justify-center gap-3"
+        >
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <span>{t('btnConvert')}</span>
+        </button>
+
+      </div>
+
+      <!-- STEP 3: Animated Extraction Progress -->
+      <div id="step-progress" class="hidden transition-all duration-300 py-6 sm:py-10 text-center">
+        
+        <!-- Smooth Soundwave / Equalizer Animation in #4A70A9 and #8FABD4 -->
+        <div class="flex items-end justify-center gap-1.5 sm:gap-2 h-24 mb-6">
+          <div class="eq-bar w-2 sm:w-2.5 bg-palette-cobalt rounded-full h-full"></div>
+          <div class="eq-bar w-2 sm:w-2.5 bg-palette-sky rounded-full h-full"></div>
+          <div class="eq-bar w-2 sm:w-2.5 bg-palette-cobalt rounded-full h-full"></div>
+          <div class="eq-bar w-2 sm:w-2.5 bg-palette-sky rounded-full h-full"></div>
+          <div class="eq-bar w-2 sm:w-2.5 bg-palette-cobalt rounded-full h-full"></div>
+          <div class="eq-bar w-2 sm:w-2.5 bg-palette-sky rounded-full h-full"></div>
+          <div class="eq-bar w-2 sm:w-2.5 bg-palette-cobalt rounded-full h-full"></div>
+          <div class="eq-bar w-2 sm:w-2.5 bg-palette-sky rounded-full h-full"></div>
+          <div class="eq-bar w-2 sm:w-2.5 bg-palette-cobalt rounded-full h-full"></div>
+          <div class="eq-bar w-2 sm:w-2.5 bg-palette-sky rounded-full h-full"></div>
+          <div class="eq-bar w-2 sm:w-2.5 bg-palette-cobalt rounded-full h-full"></div>
+          <div class="eq-bar w-2 sm:w-2.5 bg-palette-sky rounded-full h-full"></div>
+        </div>
+
+        <!-- Big Real-Time Percentage Counter (0% to 100%) -->
+        <div class="text-4xl sm:text-6xl font-black text-palette-obsidian dark:text-palette-alabaster tracking-tight mb-2">
+          <span id="progress-percent">0</span>%
+        </div>
+
+        <!-- Real-Time Phase Status Text -->
+        <p id="progress-status" class="text-base sm:text-lg font-bold text-palette-cobalt dark:text-palette-sky mb-4">
+          {t('statusReading')}
+        </p>
+
+        <!-- Progress Bar Track -->
+        <div class="w-full max-w-md mx-auto bg-palette-alabaster dark:bg-palette-darkBox rounded-full h-3 overflow-hidden border border-palette-sky/30">
+          <div id="progress-bar-fill" class="bg-palette-cobalt dark:bg-palette-sky h-full transition-all duration-150 w-0"></div>
+        </div>
+
+      </div>
+
+      <!-- STEP 4: Instant Download & Preview -->
+      <div id="step-preview" class="hidden transition-all duration-300">
+        
+        <div class="text-center mb-6">
+          <div class="w-16 h-16 rounded-full bg-green-500/20 text-green-500 mx-auto flex items-center justify-center mb-3">
+            <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black text-palette-obsidian dark:text-palette-alabaster mb-1">
+            {t('statusDone')}
+          </h2>
+          <p id="result-meta-text" class="text-sm sm:text-base font-semibold text-palette-cobalt dark:text-palette-sky">
+            audio.mp3 • 192 kbps • 00:00
+          </p>
+        </div>
+
+        <!-- Built-in HTML5 Audio Preview Player -->
+        <div class="p-4 sm:p-5 rounded-2xl bg-palette-alabaster/60 dark:bg-palette-darkBox border border-palette-sky/40 mb-6 flex flex-col gap-3">
+          <span class="text-xs font-bold text-palette-cobalt dark:text-palette-sky uppercase tracking-wider">
+            {t('previewTitle')}
+          </span>
+          <audio id="audio-player" controls class="w-full h-12 focus:outline-none rounded-xl"></audio>
+        </div>
+
+        <!-- Batch conversion list (if multiple files converted) -->
+        <div id="batch-results-list" class="hidden flex flex-col gap-2 mb-6 max-h-48 overflow-y-auto"></div>
+
+        <!-- Oversized Action Buttons -->
+        <div class="flex flex-col sm:flex-row gap-3">
+          
+          <!-- Download MP3 Button (#4A70A9) -->
+          <a
+            id="btn-download-mp3"
+            href="#"
+            download="audio.mp3"
+            class="flex-1 py-5 rounded-full bg-palette-cobalt hover:bg-palette-obsidian text-palette-alabaster dark:bg-palette-sky dark:text-palette-obsidian dark:hover:bg-palette-cobalt dark:hover:text-palette-alabaster font-black text-lg sm:text-xl shadow-xl hover:shadow-2xl transition-all duration-200 transform hover:-translate-y-0.5 active:scale-98 flex items-center justify-center gap-3 text-center"
+          >
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span id="btn-download-label">{t('btnDownload')}</span>
+          </a>
+
+          <!-- Convert Another File Reset Button -->
+          <button
+            type="button"
+            id="btn-convert-another"
+            class="sm:w-auto px-8 py-5 rounded-full bg-palette-alabaster hover:bg-palette-sky/20 text-palette-obsidian dark:bg-palette-darkBox dark:text-palette-alabaster dark:hover:bg-palette-sky/20 border-2 border-palette-sky font-bold text-base shadow-sm transition-all duration-200 flex items-center justify-center gap-2"
+          >
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="1 4 1 10 7 10"></polyline>
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+            </svg>
+            <span>{t('btnConvertAnother')}</span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- Client script connecting AudioEngine, Drag & Drop, Confetti, and State Transitions -->
+<script>
+  import confetti from 'canvas-confetti';
+  import { convertVideoToMP3, generateDemoVideoBlob, type ConversionResult } from '../scripts/audioEngine';
+
+  // State variables
+  let selectedFiles: File[] = [];
+  let selectedKbps: 128 | 192 | 320 = 192;
+  let fileDuration = 0;
+  let conversionResults: ConversionResult[] = [];
+
+  // DOM Elements
+  const stepDropzone = document.getElementById('step-dropzone');
+  const stepControls = document.getElementById('step-controls');
+  const stepProgress = document.getElementById('step-progress');
+  const stepPreview = document.getElementById('step-preview');
+
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('file-input') as HTMLInputElement;
+  const btnBrowseTrigger = document.getElementById('btn-browse-trigger');
+  const btnDemoTrigger = document.getElementById('btn-demo-trigger');
+  const demoBtnLabel = document.getElementById('demo-btn-label');
+
+  const fileInfoName = document.getElementById('file-info-name');
+  const fileInfoMeta = document.getElementById('file-info-meta');
+  const btnRemoveFile = document.getElementById('btn-remove-file');
+
+  const bitratePills = document.querySelectorAll('.bitrate-pill');
+  const trimStartRange = document.getElementById('trim-start-range') as HTMLInputElement;
+  const trimEndRange = document.getElementById('trim-end-range') as HTMLInputElement;
+  const trimStartVal = document.getElementById('trim-start-val');
+  const trimEndVal = document.getElementById('trim-end-val');
+  const fadeInCheck = document.getElementById('fade-in-check') as HTMLInputElement;
+  const fadeOutCheck = document.getElementById('fade-out-check') as HTMLInputElement;
+  const btnStartConvert = document.getElementById('btn-start-convert');
+
+  const progressPercent = document.getElementById('progress-percent');
+  const progressStatus = document.getElementById('progress-status');
+  const progressBarFill = document.getElementById('progress-bar-fill');
+
+  const audioPlayer = document.getElementById('audio-player') as HTMLAudioElement;
+  const btnDownloadMp3 = document.getElementById('btn-download-mp3') as HTMLAnchorElement;
+  const btnDownloadLabel = document.getElementById('btn-download-label');
+  const resultMetaText = document.getElementById('result-meta-text');
+  const btnConvertAnother = document.getElementById('btn-convert-another');
+  const batchResultsList = document.getElementById('batch-results-list');
+
+  // Step navigation helper
+  function showStep(step: 'dropzone' | 'controls' | 'progress' | 'preview') {
+    stepDropzone?.classList.toggle('hidden', step !== 'dropzone');
+    stepControls?.classList.toggle('hidden', step !== 'controls');
+    stepProgress?.classList.toggle('hidden', step !== 'progress');
+    stepPreview?.classList.toggle('hidden', step !== 'preview');
+  }
+
+  function formatTime(seconds: number): string {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  }
+
+  function formatFileSize(bytes: number): string {
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  }
+
+  // Handle files selected
+  async function handleFiles(files: FileList | File[]) {
+    if (!files || files.length === 0) return;
+    selectedFiles = Array.from(files);
+
+    const firstFile = selectedFiles[0];
+    if (fileInfoName) {
+      fileInfoName.textContent = selectedFiles.length > 1
+        ? `${firstFile.name} (+${selectedFiles.length - 1} more)`
+        : firstFile.name;
+    }
+
+    if (fileInfoMeta) {
+      fileInfoMeta.textContent = `${formatFileSize(firstFile.size)} • Loading duration...`;
+    }
+
+    // Try reading duration via audio/video metadata
+    const tempUrl = URL.createObjectURL(firstFile);
+    const tempVideo = document.createElement('video');
+    tempVideo.preload = 'metadata';
+    tempVideo.src = tempUrl;
+
+    tempVideo.onloadedmetadata = () => {
+      fileDuration = tempVideo.duration || 0;
+      URL.revokeObjectURL(tempUrl);
+      if (fileInfoMeta) {
+        fileInfoMeta.textContent = `${formatFileSize(firstFile.size)} • ${formatTime(fileDuration)}`;
+      }
+      if (trimEndRange && trimEndVal) {
+        trimEndRange.max = String(fileDuration);
+        trimEndRange.value = String(fileDuration);
+        trimEndVal.textContent = formatTime(fileDuration);
+      }
+      if (trimStartRange && trimStartVal) {
+        trimStartRange.max = String(fileDuration);
+        trimStartRange.value = '0';
+        trimStartVal.textContent = '00:00';
+      }
+    };
+
+    tempVideo.onerror = () => {
+      URL.revokeObjectURL(tempUrl);
+      if (fileInfoMeta) {
+        fileInfoMeta.textContent = formatFileSize(firstFile.size);
+      }
+    };
+
+    showStep('controls');
+  }
+
+  // File Input and Browse trigger
+  btnBrowseTrigger?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    fileInput?.click();
+  });
+
+  dropzone?.addEventListener('click', () => {
+    fileInput?.click();
+  });
+
+  fileInput?.addEventListener('change', () => {
+    if (fileInput.files) handleFiles(fileInput.files);
+  });
+
+  // Drag & Drop event handlers
+  ['dragenter', 'dragover'].forEach((eventName) => {
+    dropzone?.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropzone.classList.add('dragover');
+    });
+  });
+
+  ['dragleave', 'drop'].forEach((eventName) => {
+    dropzone?.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropzone.classList.remove('dragover');
+    });
+  });
+
+  dropzone?.addEventListener('drop', (e) => {
+    const dt = (e as DragEvent).dataTransfer;
+    if (dt?.files) handleFiles(dt.files);
+  });
+
+  // Demo Video button: generates synth melody video in-memory
+  btnDemoTrigger?.addEventListener('click', async (e) => {
+    e.stopPropagation();
+    if (demoBtnLabel) demoBtnLabel.textContent = 'Generating 4s Demo...';
+    try {
+      const demoFile = await generateDemoVideoBlob();
+      handleFiles([demoFile]);
+    } catch (err) {
+      console.error('Demo video generation error:', err);
+    } finally {
+      if (demoBtnLabel) demoBtnLabel.textContent = 'Try Instant Demo Video';
+    }
+  });
+
+  // Remove file button
+  btnRemoveFile?.addEventListener('click', () => {
+    selectedFiles = [];
+    fileInput.value = '';
+    showStep('dropzone');
+  });
+
+  // Bitrate Pill selectors
+  bitratePills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      bitratePills.forEach((p) => {
+        p.classList.remove('active', 'border-palette-cobalt', 'bg-palette-sky/15', 'dark:bg-palette-cobalt/20', 'dark:border-palette-sky');
+        p.classList.add('border-palette-sky/50', 'bg-white', 'dark:bg-palette-darkBox');
+        p.querySelector('.pill-check')?.classList.add('hidden');
+      });
+
+      pill.classList.add('active', 'border-palette-cobalt', 'bg-palette-sky/15', 'dark:bg-palette-cobalt/20', 'dark:border-palette-sky');
+      pill.classList.remove('border-palette-sky/50', 'bg-white', 'dark:bg-palette-darkBox');
+      pill.querySelector('.pill-check')?.classList.remove('hidden');
+
+      const kbpsVal = Number(pill.getAttribute('data-kbps')) as 128 | 192 | 320;
+      selectedKbps = kbpsVal || 192;
+    });
+  });
+
+  // Trim sliders update
+  trimStartRange?.addEventListener('input', () => {
+    const val = Number(trimStartRange.value);
+    if (val >= Number(trimEndRange.value)) {
+      trimStartRange.value = String(Number(trimEndRange.value) - 0.5);
+    }
+    if (trimStartVal) trimStartVal.textContent = formatTime(Number(trimStartRange.value));
+  });
+
+  trimEndRange?.addEventListener('input', () => {
+    const val = Number(trimEndRange.value);
+    if (val <= Number(trimStartRange.value)) {
+      trimEndRange.value = String(Number(trimStartRange.value) + 0.5);
+    }
+    if (trimEndVal) trimEndVal.textContent = formatTime(Number(trimEndRange.value));
+  });
+
+  // Start Conversion Pipeline
+  btnStartConvert?.addEventListener('click', async () => {
+    if (selectedFiles.length === 0) return;
+
+    showStep('progress');
+    conversionResults = [];
+
+    const startTime = Number(trimStartRange?.value) || 0;
+    const endTime = Number(trimEndRange?.value) || 0;
+    const fadeIn = fadeInCheck?.checked || false;
+    const fadeOut = fadeOutCheck?.checked || false;
+
+    for (let index = 0; index < selectedFiles.length; index++) {
+      const file = selectedFiles[index];
+      const filePrefix = selectedFiles.length > 1 ? `[File ${index + 1}/${selectedFiles.length}] ` : '';
+
+      try {
+        const result = await convertVideoToMP3(file, file.name, {
+          kbps: selectedKbps,
+          startTime: startTime > 0 ? startTime : undefined,
+          endTime: endTime > 0 ? endTime : undefined,
+          fadeIn,
+          fadeOut,
+          onProgress: (percent, phase) => {
+            if (progressPercent) progressPercent.textContent = String(percent);
+            if (progressBarFill) progressBarFill.style.width = `${percent}%`;
+            if (progressStatus) {
+              const phaseLabel = phase === 'statusReading' ? 'Reading container...'
+                : phase === 'statusDecoding' ? 'Decoding audio stream locally...'
+                : phase === 'statusProcessing' ? 'Applying audio trim & envelope...'
+                : phase === 'statusEncoding' ? `Encoding pristine MP3 (${selectedKbps} kbps)...`
+                : 'Audio extracted successfully!';
+              progressStatus.textContent = `${filePrefix}${phaseLabel}`;
+            }
+          },
+        });
+
+        conversionResults.push(result);
+      } catch (err: any) {
+        alert(`Error processing ${file.name}: ${err?.message || 'Unsupported format'}`);
+      }
+    }
+
+    if (conversionResults.length === 0) {
+      showStep('controls');
+      return;
+    }
+
+    // Finished: Setup Preview & Download
+    const primaryResult = conversionResults[0];
+    if (audioPlayer) {
+      audioPlayer.src = primaryResult.url;
+    }
+
+    if (btnDownloadMp3) {
+      btnDownloadMp3.href = primaryResult.url;
+      btnDownloadMp3.download = primaryResult.fileName;
+    }
+
+    if (resultMetaText) {
+      resultMetaText.textContent = `${primaryResult.fileName} • ${primaryResult.kbps} kbps • ${formatTime(primaryResult.duration)}`;
+    }
+
+    // If batch conversion, render list of all files with separate download buttons
+    if (batchResultsList) {
+      if (conversionResults.length > 1) {
+        batchResultsList.classList.remove('hidden');
+        batchResultsList.innerHTML = '';
+        conversionResults.forEach((res) => {
+          const row = document.createElement('div');
+          row.className = 'flex items-center justify-between p-3 rounded-xl bg-palette-alabaster dark:bg-palette-darkBox border border-palette-sky/30';
+          row.innerHTML = `
+            <div class="overflow-hidden">
+              <p class="font-bold text-sm text-palette-obsidian dark:text-palette-alabaster truncate">${res.fileName}</p>
+              <p class="text-xs text-palette-cobalt dark:text-palette-sky">${res.kbps} kbps • ${formatTime(res.duration)}</p>
+            </div>
+            <a href="${res.url}" download="${res.fileName}" class="px-3.5 py-1.5 rounded-full bg-palette-cobalt text-white text-xs font-bold hover:bg-palette-obsidian transition-colors">
+              Download
+            </a>
+          `;
+          batchResultsList.appendChild(row);
+        });
+      } else {
+        batchResultsList.classList.add('hidden');
+      }
+    }
+
+    // Trigger celebration confetti!
+    confetti({
+      particleCount: 80,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#4A70A9', '#8FABD4', '#EFECE3', '#000000'],
+    });
+
+    showStep('preview');
+  });
+
+  // Convert Another File Reset
+  btnConvertAnother?.addEventListener('click', () => {
+    if (audioPlayer) {
+      audioPlayer.pause();
+      audioPlayer.src = '';
+    }
+    conversionResults.forEach((r) => URL.revokeObjectURL(r.url));
+    conversionResults = [];
+    selectedFiles = [];
+    fileInput.value = '';
+    showStep('dropzone');
+  });
+</script>

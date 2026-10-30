@@ -1,0 +1,21 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ConverterBox from '../../components/ConverterBox.astro';
+import HowToAndFAQ from '../../components/HowToAndFAQ.astro';
+import { type SupportedLanguage } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  const otherLanguages = ['es', 'pt', 'de', 'fr', 'ja', 'zh', 'ru'];
+  return otherLanguages.map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params;
+const currentLang = (lang as SupportedLanguage) || 'en';
+---
+
+<Layout currentLang={currentLang}>
+  <ConverterBox currentLang={currentLang} />
+  <HowToAndFAQ currentLang={currentLang} />
+</Layout>

@@ -1,0 +1,17 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Astro & Build Output
+dist/
+.astro/
+
+# Environment and IDE
+.env
+.env.*
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

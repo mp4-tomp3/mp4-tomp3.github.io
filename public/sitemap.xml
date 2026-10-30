@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://mp4-tomp3.github.io/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mp4-tomp3.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mp4-tomp3.github.io/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://mp4-tomp3.github.io/pt/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mp4-tomp3.github.io/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mp4-tomp3.github.io/fr/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://mp4-tomp3.github.io/ja/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://mp4-tomp3.github.io/zh/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://mp4-tomp3.github.io/ru/"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://mp4-tomp3.github.io/es/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mp4-tomp3.github.io/pt/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mp4-tomp3.github.io/de/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mp4-tomp3.github.io/fr/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mp4-tomp3.github.io/ja/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mp4-tomp3.github.io/zh/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mp4-tomp3.github.io/ru/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+</urlset>
