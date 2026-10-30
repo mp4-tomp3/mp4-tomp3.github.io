@@ -18,23 +18,6 @@ const t = useTranslations(currentLang);
   <!-- Main Hero Workspace Div Container -->
   <div class="w-full max-w-4xl mx-auto flex flex-col items-center z-10">
 
-    <!-- Privacy & Offline Badges -->
-    <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-4 text-center">
-      <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-white dark:bg-palette-darkCard text-palette-cobalt dark:text-palette-sky border border-palette-sky/40 shadow-sm">
-        <svg class="w-4 h-4 text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-        </svg>
-        {t('badgePrivacy')}
-      </span>
-      <span class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-palette-cobalt/10 text-palette-cobalt dark:bg-palette-sky/15 dark:text-palette-sky border border-palette-cobalt/30">
-        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <circle cx="12" cy="12" r="10"></circle>
-          <polyline points="12 6 12 12 16 14"></polyline>
-        </svg>
-        {t('badgeOffline')}
-      </span>
-    </div>
-
     <!-- Big Bold Title & Tagline -->
     <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-center tracking-tight text-palette-obsidian dark:text-palette-alabaster mb-3 leading-[1.15]">
       {t('siteTitle').split('-')[0].trim()}
