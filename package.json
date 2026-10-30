@@ -13,10 +13,17 @@
     "type": "git",
     "url": "git+https://github.com/mp4-tomp3/mp4-tomp3.github.io.git"
   },
-  "keywords": ["mp4-to-mp3", "audio-converter", "client-side", "wasm", "web-audio-api"],
+  "keywords": [
+    "mp4-to-mp3",
+    "audio-converter",
+    "client-side",
+    "wasm",
+    "web-audio-api"
+  ],
   "author": "Kishara",
   "license": "MIT",
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
     "@astrojs/tailwind": "^6.0.2",
     "@breezystack/lamejs": "^1.2.7",
     "astro": "^5.18.2",
