@@ -5,7 +5,7 @@
 [![100% Client-Side](https://img.shields.io/badge/Privacy-100%25%20Zero--Upload-22c55e?style=for-the-badge&logo=shield&logoColor=white)](https://mp4-tomp3.github.io/)
 [![PWA Offline Ready](https://img.shields.io/badge/PWA-100%25%20Offline%20Ready-8FABD4?style=for-the-badge&logo=pwa&logoColor=000000)](https://mp4-tomp3.github.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-EFECE3?style=for-the-badge&logoColor=000000)](LICENSE)
-[![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20the%20Dev-FF5E5B?style=for-the-badge&logo=kofi&logoColor=white)](https://ko-fi.com/kishara)
+[![Support on Gumroad](https://img.shields.io/badge/Support-Buy%20Me%20a%20Coffee-FF5E5B?style=for-the-badge&logo=gumroad&logoColor=white)](https://kisharadilshan.gumroad.com/coffee)
 
 > **Free, instantaneous, and strictly private MP4 to MP3 conversion directly in your web browser.** Zero bytes are ever uploaded to any cloud or remote server. Works 100% offline as a Progressive Web App (PWA).
 
@@ -145,7 +145,7 @@ This repository deploys automatically on every push to the `main` branch via Git
 
 If this open-source, privacy-first audio converter saved your day, please consider supporting ongoing development:
 
-[![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20Kishara-FF5E5B?style=for-the-badge&logo=kofi&logoColor=white)](https://ko-fi.com/kishara)
+[![Support on Gumroad](https://img.shields.io/badge/Support-Buy%20Me%20a%20Coffee-FF5E5B?style=for-the-badge&logo=gumroad&logoColor=white)](https://kisharadilshan.gumroad.com/coffee)
 
 Your contribution helps maintain zero-ad, client-side open-source utilities for everyone.
 
